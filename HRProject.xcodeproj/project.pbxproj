@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		245DA9281ECC936B00A37705 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DA9271ECC936B00A37705 /* CommentsVC.swift */; };
+		245DA92B1ECC940D00A37705 /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DA92A1ECC940D00A37705 /* CircularTransition.swift */; };
 		249F2BB11ECC29890005F9AF /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249F2BB01ECC29890005F9AF /* extension.swift */; };
 		249F2BB61ECC2FDC0005F9AF /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249F2BB41ECC2FDC0005F9AF /* TeamCell.swift */; };
 		249F2BB71ECC2FDC0005F9AF /* TeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249F2BB51ECC2FDC0005F9AF /* TeamCell.xib */; };
@@ -23,6 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		245DA9271ECC936B00A37705 /* CommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
+		245DA92A1ECC940D00A37705 /* CircularTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTransition.swift; sourceTree = "<group>"; };
 		249F2BB01ECC29890005F9AF /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		249F2BB41ECC2FDC0005F9AF /* TeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
 		249F2BB51ECC2FDC0005F9AF /* TeamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamCell.xib; sourceTree = "<group>"; };
@@ -54,6 +58,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		245DA9291ECC93FA00A37705 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				245DA92A1ECC940D00A37705 /* CircularTransition.swift */,
+				249F2BB01ECC29890005F9AF /* extension.swift */,
+			);
+			name = helpers;
+			sourceTree = "<group>";
+		};
 		24D68FAC1ECAD79E008ACFF5 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +88,7 @@
 		24D68FB71ECAD79E008ACFF5 /* HRProject */ = {
 			isa = PBXGroup;
 			children = (
+				245DA9291ECC93FA00A37705 /* helpers */,
 				24D68FCE1ECAFB49008ACFF5 /* controllers */,
 				24D68FB81ECAD79E008ACFF5 /* AppDelegate.swift */,
 				24D68FBC1ECAD79E008ACFF5 /* Main.storyboard */,
@@ -93,9 +107,9 @@
 				24D68FCF1ECAFC2A008ACFF5 /* ProjectsVC.swift */,
 				24D68FD11ECAFC9E008ACFF5 /* TeamVC.swift */,
 				24D68FD51ECB4B00008ACFF5 /* ProfileVC.swift */,
-				249F2BB01ECC29890005F9AF /* extension.swift */,
 				249F2BB41ECC2FDC0005F9AF /* TeamCell.swift */,
 				249F2BB51ECC2FDC0005F9AF /* TeamCell.xib */,
+				245DA9271ECC936B00A37705 /* CommentsVC.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -247,9 +261,11 @@
 				24D68FB91ECAD79E008ACFF5 /* AppDelegate.swift in Sources */,
 				249F2BB11ECC29890005F9AF /* extension.swift in Sources */,
 				24D68FD61ECB4B00008ACFF5 /* ProfileVC.swift in Sources */,
+				245DA92B1ECC940D00A37705 /* CircularTransition.swift in Sources */,
 				24D68FD01ECAFC2A008ACFF5 /* ProjectsVC.swift in Sources */,
 				24D68FCB1ECAD9C0008ACFF5 /* LoginVC.swift in Sources */,
 				24D68FD21ECAFC9E008ACFF5 /* TeamVC.swift in Sources */,
+				245DA9281ECC936B00A37705 /* CommentsVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

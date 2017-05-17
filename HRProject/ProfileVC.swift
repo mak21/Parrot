@@ -8,28 +8,45 @@
 
 import UIKit
 
-class ProfileVC: UIViewController {
-
+class ProfileVC: UIViewController{
+ let transition = CircularTransition()
+  @IBOutlet weak var commentButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      commentButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
         // Do any additional setup after loading the view.
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+//  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//    let commentVC = segue.destination as! CommentsVC
+//    commentVC.transitioningDelegate = self
+//    commentVC.modalPresentationStyle = .custom
+//  }
+  func commentsButtonTapped(){
+     let commentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CommentsVC")as! CommentsVC
+    commentVC.transitioningDelegate = self
+    commentVC.modalPresentationStyle = .custom
+    present(commentVC, animated: true, completion: nil)
+  }
+  
+  
+
+}
+extension ProfileVC: UIViewControllerTransitioningDelegate {
+  func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .present
+    transition.startingPoint = commentButton.center
+  
+    transition.circleColor = UIColor.red//commentButton.backgroundColor!
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    return transition
+  }
+  
+  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .dismiss
+    transition.startingPoint = commentButton.center
+    transition.circleColor = UIColor.white//commentButton.backgroundColor!
+    
+    return transition
+  }
 }

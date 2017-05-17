@@ -55,6 +55,7 @@ class TeamVC: UIViewController {
       ratingButton.setTitle("Next", for: .normal)
       cosomosRateView.isHidden = false
       commentTextView.isHidden = true
+    
     }
     cosomosRateView.rating = 0.0
      categoryLabel.text = categories[i]
