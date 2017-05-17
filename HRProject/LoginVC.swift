@@ -20,15 +20,9 @@ class LoginVC: UIViewController {
       }
     }
     
-  override func viewWillAppear(_ animated: Bool) {
-    if UserDefaults.standard.string(forKey: "AUTH_TOKEN") != nil{
-      
-      displayHome()
-    }
-  }
     override func viewDidLoad() {
       super.viewDidLoad()
-      // Do any additional setup after loading the view, typically from a nib.
+     
   
     }
     
@@ -38,10 +32,10 @@ class LoginVC: UIViewController {
       
       
       let username = "mak@gmail.com"
-      let password = "1234567"
+      let password = "12345678"
       
       
-      let url = URL(string: "")
+      let url = URL(string: "http://192.168.1.151:3000/api/v1/sessions")
       var urlRequest = URLRequest(url: url!)
       
       urlRequest.httpMethod = "POST"

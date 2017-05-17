@@ -9,13 +9,16 @@
 import UIKit
 import Cosmos
 class TeamVC: UIViewController {
+  var currentProjectId : Int = 0
+  var membersDict : [String:String] = [:]
   var ratingDict : [String:Any] = ["positive_attitude":0,"creativity":0,"responsibility":0,"teamwork":0,"critical_thinking":0,"Comment":""]
   var categories = ["Positive Attitude","Creativity","Responsibility","TeamworkRate","Critical Thinking", "comment"]
   var i = 0
+  @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var ratingButton: UIButton!
   @IBOutlet var ratingView: UIView!
 
-  @IBOutlet weak var commentTextField: UITextField!
+  @IBOutlet weak var commentTextView: UITextView!
   @IBOutlet weak var selectedPersonNameLabel: UILabel!
   @IBOutlet weak var categoryLabel: UILabel!
   @IBOutlet weak var cosomosRateView: CosmosView!{
@@ -28,6 +31,7 @@ class TeamVC: UIViewController {
   @IBOutlet weak var visualEffectView: UIVisualEffectView! 
   @IBOutlet weak var teamTableView: UITableView!{
   didSet{
+    teamTableView.register(TeamCell.cellNib, forCellReuseIdentifier: TeamCell.cellIdentifier)
   teamTableView.dataSource = self
   teamTableView.delegate = self
   }
@@ -35,11 +39,13 @@ class TeamVC: UIViewController {
   var effect :UIVisualEffect!
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+      profileImageView.circlerImage()
       effect = visualEffectView.effect
       //visualEffectView.effect = nil
      visualEffectView.isHidden = true
       ratingView.layer.cornerRadius = 5
+      ratingButton.layer.cornerRadius = 15
+      ratingButton.layer.masksToBounds = true
       
     }
 
@@ -48,11 +54,14 @@ class TeamVC: UIViewController {
     if i == 0{
       ratingButton.setTitle("Next", for: .normal)
       cosomosRateView.isHidden = false
-      commentTextField.isHidden = true
+      commentTextView.isHidden = true
     }
     cosomosRateView.rating = 0.0
      categoryLabel.text = categories[i]
     cosomosRateView.didFinishTouchingCosmos = { rating in
+      if self.categories[self.i] == "comment"{
+       self.ratingDict [self.categories[self.i]] = self.commentTextView.text
+      }
       self.ratingDict [self.categories[self.i]] = Int(rating)
     }
   }
@@ -90,16 +99,18 @@ class TeamVC: UIViewController {
   }
   
   @IBAction func ratingViewButtonClicked(_ sender: Any) {
-    if cosomosRateView.rating != 0.0{
+    
+    if cosomosRateView.rating != 0.0 || commentTextView.text != ""{
       i+=1
     if i == 6{
       print(ratingDict)
+      sendRating()
       animateOut()
     }else
     if i == 5 {
        ratingButton.setTitle("Submit", for: .normal)
       cosomosRateView.isHidden = true
-      commentTextField.isHidden = false
+      commentTextView.isHidden = false
       setupViewUI()
     }else{
   
@@ -109,15 +120,74 @@ class TeamVC: UIViewController {
   }
   }
   
-  
+  func sendRating() {
+    guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
+    
+    let url = URL(string: "http://192.168.1.151:3000/api/v1/projects/\(currentProjectId)?private_token=/\(validToken)")
+    var urlRequest = URLRequest(url: url!)
+    
+    urlRequest.httpMethod = "PUT"
+    urlRequest.setValue("application/json", forHTTPHeaderField: "Content-type")
+    
+    
+    var data: Data?
+    do {
+      data = try JSONSerialization.data(withJSONObject: self.ratingDict, options: .prettyPrinted)
+    } catch let error as NSError {
+      print(error.localizedDescription)
+    }
+    
+    urlRequest.httpBody = data
+    
+    
+    let urlSession = URLSession(configuration: URLSessionConfiguration.default)
+    
+    let dataTask = urlSession.dataTask(with: urlRequest) { (data, response, error) in
+      
+      
+      if let validError = error {
+        print(validError.localizedDescription)
+      }
+      
+      
+      if let httpResponse = response as? HTTPURLResponse {
+        
+        if httpResponse.statusCode == 200 {
+          
+          do {
+            let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+            
+            
+            
+            
+          
+            
+          } catch let jsonError as NSError {
+            
+          }
+          
+        }
+      }
+      
+    }
+    
+    dataTask.resume()
+    
+    
+  }
 }
 extension TeamVC : UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 2
+    
+   return membersDict.keys.count / 2
+  
+   
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
-    cell.textLabel?.text = "Name"
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamCell.cellIdentifier, for: indexPath) as? TeamCell else {  return UITableViewCell()}
+    cell.nameLabel.text = membersDict["name"]
+    guard let url = membersDict["image"] else{return UITableViewCell()}
+  cell.profileImageView.loadImageUsingCacheWithUrlString(url)
     cell.accessoryType = .none
     return cell
   }
@@ -132,5 +202,8 @@ extension TeamVC : UITableViewDelegate{
     animateIn()
     }
     cell?.accessoryType = .checkmark
+  }
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 85
   }
 }

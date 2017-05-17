@@ -15,7 +15,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    // Override point for customization after application launch.
+    if UserDefaults.standard.string(forKey: "AUTH_TOKEN") != nil{
+      
+      let initController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabBarController")
+      window?.rootViewController = initController
+      
+    }else{
+      let loginController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginVC")
+      window?.rootViewController = loginController
+    }
+    self.window?.makeKeyAndVisible()
+    
     return true
   }
 
