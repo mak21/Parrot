@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,29 +19,56 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCI-1u-3P6">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCI-1u-3P6">
                         <rect key="frame" x="8" y="8" width="304" height="36"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="kTL-4K-CLd"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57O-wE-LRZ">
-                        <rect key="frame" x="8" y="66" width="25" height="25"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Button" image="thumbs_up"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57O-wE-LRZ">
+                        <rect key="frame" x="8" y="71" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="94M-Wi-Vdv"/>
+                            <constraint firstAttribute="height" constant="25" id="PCU-1c-sph"/>
+                        </constraints>
+                        <state key="normal" image="thumbs_up"/>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lj8-u6-iPI">
-                        <rect key="frame" x="41" y="66" width="25" height="25"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <state key="normal" title="Button" image="thumbs_up"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lj8-u6-iPI">
+                        <rect key="frame" x="38" y="71" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="Qsu-mo-aep"/>
+                            <constraint firstAttribute="width" constant="25" id="Qzn-x4-fCf"/>
+                        </constraints>
+                        <state key="normal" image="heart"/>
                     </button>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="57O-wE-LRZ" secondAttribute="bottom" constant="3.5" id="4XY-st-dnx"/>
+                    <constraint firstItem="lj8-u6-iPI" firstAttribute="leading" secondItem="57O-wE-LRZ" secondAttribute="trailing" constant="5" id="79G-Ms-nTr"/>
+                    <constraint firstAttribute="bottom" secondItem="lj8-u6-iPI" secondAttribute="bottom" constant="3.5" id="Cuf-wz-czB"/>
+                    <constraint firstItem="57O-wE-LRZ" firstAttribute="top" relation="lessThanOrEqual" secondItem="qCI-1u-3P6" secondAttribute="bottom" constant="27" id="Ug0-Hu-noN"/>
+                    <constraint firstItem="qCI-1u-3P6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Xi3-bX-WAz"/>
+                    <constraint firstItem="lj8-u6-iPI" firstAttribute="leading" secondItem="57O-wE-LRZ" secondAttribute="trailing" constant="5" id="ZHV-W7-Xcq"/>
+                    <constraint firstItem="qCI-1u-3P6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="gNQ-T0-2uo"/>
+                    <constraint firstItem="qCI-1u-3P6" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="njh-5Z-Rbi"/>
+                    <constraint firstItem="57O-wE-LRZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="oSA-ar-FcT"/>
+                    <constraint firstAttribute="trailing" secondItem="lj8-u6-iPI" secondAttribute="trailing" constant="257" id="vzT-Z4-hNX"/>
+                    <constraint firstAttribute="bottom" secondItem="lj8-u6-iPI" secondAttribute="bottom" constant="3.5" id="zUA-QF-Zfc"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="feedLabel" destination="qCI-1u-3P6" id="FXh-rL-Hes"/>
+                <outlet property="thumbDownButton" destination="lj8-u6-iPI" id="Klu-5J-KEO"/>
+                <outlet property="thumbUpButton" destination="57O-wE-LRZ" id="40A-iJ-eiF"/>
+            </connections>
             <point key="canvasLocation" x="25" y="80"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="heart" width="64" height="64"/>
         <image name="thumbs_up" width="64" height="64"/>
     </resources>
 </document>

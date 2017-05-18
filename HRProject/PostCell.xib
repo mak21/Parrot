@@ -12,31 +12,31 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="113" id="KGk-i7-Jjw" customClass="PostCell" customModule="HRProject" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="113"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="100" id="KGk-i7-Jjw" customClass="PostCell" customModule="HRProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="112.5"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="99.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eUW-YO-1nZ">
-                        <rect key="frame" x="8" y="8" width="70" height="70"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="comment" translatesAutoresizingMaskIntoConstraints="NO" id="eUW-YO-1nZ">
+                        <rect key="frame" x="8" y="15" width="70" height="70"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="70" id="5Co-9D-rd3"/>
-                            <constraint firstAttribute="height" constant="70" id="SV3-DZ-QMW"/>
+                            <constraint firstAttribute="height" constant="70" id="CTS-2Y-G2Z"/>
+                            <constraint firstAttribute="width" constant="70" id="gga-Xc-6z0"/>
                         </constraints>
                     </imageView>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QLG-Ed-Dxb">
-                        <rect key="frame" x="80" y="8" width="232" height="70"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QLG-Ed-Dxb">
+                        <rect key="frame" x="83" y="15" width="175" height="70"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGN-Ko-CeH">
-                        <rect key="frame" x="266" y="79" width="46" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGN-Ko-CeH">
+                        <rect key="frame" x="266" y="35" width="46" height="30"/>
                         <color key="backgroundColor" red="0.25490196079999999" green="0.36078431370000003" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="GbL-oS-5zB"/>
-                            <constraint firstAttribute="width" constant="46" id="Piq-uO-CWf"/>
+                            <constraint firstAttribute="width" constant="46" id="Hk3-zV-B8D"/>
+                            <constraint firstAttribute="height" constant="30" id="W2l-RV-8Tu"/>
                         </constraints>
                         <state key="normal" title="Post">
                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -44,16 +44,15 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="lGN-Ko-CeH" secondAttribute="bottom" constant="0.5" id="2IC-Jt-9HM"/>
-                    <constraint firstItem="lGN-Ko-CeH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="266" id="5Nt-rS-rjK"/>
-                    <constraint firstItem="QLG-Ed-Dxb" firstAttribute="leading" secondItem="eUW-YO-1nZ" secondAttribute="trailing" constant="2" id="CLb-cb-Aot"/>
-                    <constraint firstItem="QLG-Ed-Dxb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="IVh-sp-ZNI"/>
-                    <constraint firstItem="eUW-YO-1nZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="Ofp-88-UUM"/>
-                    <constraint firstAttribute="trailing" secondItem="lGN-Ko-CeH" secondAttribute="trailing" constant="8" id="UP9-3S-4D0"/>
-                    <constraint firstItem="lGN-Ko-CeH" firstAttribute="top" secondItem="QLG-Ed-Dxb" secondAttribute="bottom" constant="1" id="gBO-TU-Inz"/>
-                    <constraint firstAttribute="trailing" secondItem="QLG-Ed-Dxb" secondAttribute="trailing" constant="8" id="gTx-bB-7sv"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="eUW-YO-1nZ" secondAttribute="bottom" constant="23.5" id="ngu-uk-jd9"/>
-                    <constraint firstItem="eUW-YO-1nZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="xaT-zz-Jz8"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="QLG-Ed-Dxb" secondAttribute="bottom" constant="6.5" id="9VQ-78-got"/>
+                    <constraint firstItem="QLG-Ed-Dxb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="75" id="FAo-Mg-MOo"/>
+                    <constraint firstItem="lGN-Ko-CeH" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="InP-JR-w47"/>
+                    <constraint firstItem="eUW-YO-1nZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="ORV-EY-mvg"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="eUW-YO-1nZ" secondAttribute="bottom" constant="6.5" id="PGL-GI-edC"/>
+                    <constraint firstItem="QLG-Ed-Dxb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="ShW-5Q-Roa"/>
+                    <constraint firstItem="lGN-Ko-CeH" firstAttribute="centerY" secondItem="QLG-Ed-Dxb" secondAttribute="centerY" id="rzj-C9-rfx"/>
+                    <constraint firstItem="lGN-Ko-CeH" firstAttribute="leading" secondItem="QLG-Ed-Dxb" secondAttribute="trailing" constant="8" id="vgY-9J-mAS"/>
+                    <constraint firstItem="eUW-YO-1nZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="xcg-1S-iIP"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -61,7 +60,10 @@
                 <outlet property="profileImageView" destination="eUW-YO-1nZ" id="gQi-U2-uvp"/>
                 <outlet property="textView" destination="QLG-Ed-Dxb" id="bgx-6V-x3M"/>
             </connections>
-            <point key="canvasLocation" x="32" y="91.5"/>
+            <point key="canvasLocation" x="32" y="85"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="comment" width="128" height="128"/>
+    </resources>
 </document>
