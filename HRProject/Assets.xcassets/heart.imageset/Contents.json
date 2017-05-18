@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "satya.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "heart@2x.png",
       "scale" : "2x"
     },
     {

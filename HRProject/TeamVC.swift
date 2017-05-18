@@ -9,8 +9,9 @@
 import UIKit
 import Cosmos
 class TeamVC: UIViewController {
-  var currentProjectId : Int = 0
-  var membersDict : [String:Any] = [:]
+  
+  var members : [Member] = []
+  var groupId : Int = 0
   var ratingDict : [String:Any] = ["positive_attitude":0,"creativity":0,"responsibility":0,"teamwork":0,"critical_thinking":0,"comment":""]
   var categories = ["positive_attitude","creativity","responsibility","teamwork","critical_thinking", "comment"]
   var i = 0
@@ -21,13 +22,7 @@ class TeamVC: UIViewController {
   @IBOutlet weak var commentTextView: UITextView!
   @IBOutlet weak var selectedPersonNameLabel: UILabel!
   @IBOutlet weak var categoryLabel: UILabel!
-  @IBOutlet weak var cosomosRateView: CosmosView!{
-    didSet{
-//      cosomosRateView.didFinishTouchingCosmos = { rating in
-//        self.ratingDict ["criticalRate"] = Int(rating)
-//      }
-    }
-  }
+  @IBOutlet weak var cosomosRateView: CosmosView!
   @IBOutlet weak var visualEffectView: UIVisualEffectView! 
   @IBOutlet weak var teamTableView: UITableView!{
   didSet{
@@ -48,8 +43,66 @@ class TeamVC: UIViewController {
       ratingButton.layer.masksToBounds = true
       
     }
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    fetchMembers(groupId: groupId)
+  }
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    members.removeAll()
+  }
 
-  
+  func fetchMembers(groupId : Int){
+    
+    guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
+    
+    let url = URL(string: "http://192.168.1.122:3000/api/v1/projects/\(groupId)?private_token=\(validToken)")
+    
+    var urlRequest = URLRequest(url: url!)
+    urlRequest.httpMethod = "GET"
+    urlRequest.setValue("application/json", forHTTPHeaderField: "Content-type")
+    
+    let urlSession = URLSession(configuration: URLSessionConfiguration.default)
+    
+    let dataTask = urlSession.dataTask(with: urlRequest) { (data, response, error) in
+      
+      
+      if let validError = error {
+        
+        print(validError.localizedDescription)
+      }
+      
+      
+      if let httpResponse = response as? HTTPURLResponse {
+        
+        if httpResponse.statusCode == 200 {
+          
+          do {
+            let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+            print (jsonResponse)
+            
+            guard let validJSON = jsonResponse as? [[String:Any]] else { return }
+            for json in validJSON{
+              
+              let member = Member(dictionary: json)
+              
+              self.members.append(member)
+              
+            }
+            DispatchQueue.main.async {
+              self.teamTableView.reloadData()
+            }
+          } catch let jsonError as NSError {
+            
+          }
+          
+        }
+      }
+      
+    }
+    
+    dataTask.resume()
+  }
   func setupViewUI(){
     if i == 0{
       ratingButton.setTitle("Next", for: .normal)
@@ -65,6 +118,7 @@ class TeamVC: UIViewController {
     if self.categories[self.i] == "comment"{
       
       self.ratingDict [self.categories[self.i]] = self.commentTextView.text
+      self.ratingDict["status"] = true
     }
   }
   func animateIn() {
@@ -135,7 +189,7 @@ class TeamVC: UIViewController {
   func sendRating() {
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.122:3000/api/v1/projects/\(currentProjectId)?private_token=/\(validToken)")
+    let url = URL(string: "http://192.168.1.122:3000/api/v1/projects/\(groupId)?private_token=\(validToken)")
     var urlRequest = URLRequest(url: url!)
     
     urlRequest.httpMethod = "PUT"
@@ -189,15 +243,15 @@ class TeamVC: UIViewController {
 extension TeamVC : UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-   return membersDict.keys.count / 2
+   return members.count
   
    
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamCell.cellIdentifier, for: indexPath) as? TeamCell else {  return UITableViewCell()}
-    cell.nameLabel.text = membersDict["name"] as! String
-    guard let url = membersDict["image"] else{return UITableViewCell()}
-  cell.profileImageView.loadImageUsingCacheWithUrlString(url as! String)
+    cell.nameLabel.text = members[indexPath.row].name
+    guard let url = members[indexPath.row].profileImageUrl else{return UITableViewCell()}
+  cell.profileImageView.loadImageUsingCacheWithUrlString(url)
     cell.accessoryType = .none
     return cell
   }
@@ -207,7 +261,11 @@ extension TeamVC : UITableViewDelegate{
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      let cell = tableView.cellForRow(at: indexPath)
     i = 0
+    self.ratingDict["ratee_id"] = members[indexPath.row].id
     setupViewUI()
+    selectedPersonNameLabel.text = members[indexPath.row].name
+    guard let url = members[indexPath.row].profileImageUrl else{return}
+    profileImageView.loadImageUsingCacheWithUrlString(url)
     if cell?.accessoryType == UITableViewCellAccessoryType.none{
     animateIn()
     }
