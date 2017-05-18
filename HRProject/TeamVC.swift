@@ -10,9 +10,9 @@ import UIKit
 import Cosmos
 class TeamVC: UIViewController {
   var currentProjectId : Int = 0
-  var membersDict : [String:String] = [:]
-  var ratingDict : [String:Any] = ["positive_attitude":0,"creativity":0,"responsibility":0,"teamwork":0,"critical_thinking":0,"Comment":""]
-  var categories = ["Positive Attitude","Creativity","Responsibility","TeamworkRate","Critical Thinking", "comment"]
+  var membersDict : [String:Any] = [:]
+  var ratingDict : [String:Any] = ["positive_attitude":0,"creativity":0,"responsibility":0,"teamwork":0,"critical_thinking":0,"comment":""]
+  var categories = ["positive_attitude","creativity","responsibility","teamwork","critical_thinking", "comment"]
   var i = 0
   @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var ratingButton: UIButton!
@@ -60,10 +60,11 @@ class TeamVC: UIViewController {
     cosomosRateView.rating = 0.0
      categoryLabel.text = categories[i]
     cosomosRateView.didFinishTouchingCosmos = { rating in
-      if self.categories[self.i] == "comment"{
-       self.ratingDict [self.categories[self.i]] = self.commentTextView.text
-      }
       self.ratingDict [self.categories[self.i]] = Int(rating)
+    }
+    if self.categories[self.i] == "comment"{
+      
+      self.ratingDict [self.categories[self.i]] = self.commentTextView.text
     }
   }
   func animateIn() {
@@ -103,8 +104,14 @@ class TeamVC: UIViewController {
     
     if cosomosRateView.rating != 0.0 || commentTextView.text != ""{
       i+=1
+      
     if i == 6{
+      
+      
+      i = 5
+      setupViewUI()
       print(ratingDict)
+      
       sendRating()
       animateOut()
     }else
@@ -113,6 +120,10 @@ class TeamVC: UIViewController {
       cosomosRateView.isHidden = true
       commentTextView.isHidden = false
       setupViewUI()
+//    }else if i == 6 {
+//      i = 5
+//      setupViewUI()
+//    }
     }else{
   
     setupViewUI()
@@ -124,7 +135,7 @@ class TeamVC: UIViewController {
   func sendRating() {
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.151:3000/api/v1/projects/\(currentProjectId)?private_token=/\(validToken)")
+    let url = URL(string: "http://192.168.1.122:3000/api/v1/projects/\(currentProjectId)?private_token=/\(validToken)")
     var urlRequest = URLRequest(url: url!)
     
     urlRequest.httpMethod = "PUT"
@@ -133,6 +144,7 @@ class TeamVC: UIViewController {
     
     var data: Data?
     do {
+      
       data = try JSONSerialization.data(withJSONObject: self.ratingDict, options: .prettyPrinted)
     } catch let error as NSError {
       print(error.localizedDescription)
@@ -160,9 +172,6 @@ class TeamVC: UIViewController {
             
             
             
-            
-          
-            
           } catch let jsonError as NSError {
             
           }
@@ -186,9 +195,9 @@ extension TeamVC : UITableViewDataSource{
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamCell.cellIdentifier, for: indexPath) as? TeamCell else {  return UITableViewCell()}
-    cell.nameLabel.text = membersDict["name"]
+    cell.nameLabel.text = membersDict["name"] as! String
     guard let url = membersDict["image"] else{return UITableViewCell()}
-  cell.profileImageView.loadImageUsingCacheWithUrlString(url)
+  cell.profileImageView.loadImageUsingCacheWithUrlString(url as! String)
     cell.accessoryType = .none
     return cell
   }

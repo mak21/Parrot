@@ -11,7 +11,7 @@ import UIKit
 class ProjectsVC: UIViewController {
 var projects :[Any] = []
   var idsDict : [String: Int] = [:]
-  var membersDic : [String : String] = [:]
+  var membersDic : [String : Any] = [:]
   @IBOutlet weak var projectsTableView: UITableView!{
     didSet{
       projectsTableView.dataSource = self
@@ -28,7 +28,7 @@ var projects :[Any] = []
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.151:3000/api/v1/projects?private_token=\(validToken)")
+    let url = URL(string: "http://192.168.1.122:3000/api/v1/projects?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -84,7 +84,7 @@ var projects :[Any] = []
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.151:3000/api/v1/projects/\(groupId)?private_token=\(validToken)")
+    let url = URL(string: "http://192.168.1.122:3000/api/v1/projects/\(groupId)?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -112,9 +112,9 @@ var projects :[Any] = []
             guard let validJSON = jsonResponse as? [[String:Any]] else { return }
             
             for project in validJSON{
-              
+              // i think this should be [[String:Any]] array of small dict
              self.membersDic["name"] = project["full_name"] as? String
-              
+              self.membersDic["id"] = project["id"] as? Int
               guard let images = project["avatar"] as? [String:Any] else{return }
               
               for image in (images["medium"] as? [String:Any])! {
