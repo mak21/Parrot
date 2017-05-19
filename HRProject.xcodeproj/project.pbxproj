@@ -11,6 +11,7 @@
 		245DA92B1ECC940D00A37705 /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DA92A1ECC940D00A37705 /* CircularTransition.swift */; };
 		24757A8E1ECEA2DA0081BFAE /* CommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24757A8C1ECEA2DA0081BFAE /* CommentsCell.swift */; };
 		24757A8F1ECEA2DA0081BFAE /* CommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24757A8D1ECEA2DA0081BFAE /* CommentsCell.xib */; };
+		249590D71ECF109500E610A7 /* AlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249590D61ECF109500E610A7 /* AlertControl.swift */; };
 		249F2BB11ECC29890005F9AF /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249F2BB01ECC29890005F9AF /* extension.swift */; };
 		249F2BB61ECC2FDC0005F9AF /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249F2BB41ECC2FDC0005F9AF /* TeamCell.swift */; };
 		249F2BB71ECC2FDC0005F9AF /* TeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249F2BB51ECC2FDC0005F9AF /* TeamCell.xib */; };
@@ -38,6 +39,7 @@
 		245DA92A1ECC940D00A37705 /* CircularTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTransition.swift; sourceTree = "<group>"; };
 		24757A8C1ECEA2DA0081BFAE /* CommentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsCell.swift; sourceTree = "<group>"; };
 		24757A8D1ECEA2DA0081BFAE /* CommentsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsCell.xib; sourceTree = "<group>"; };
+		249590D61ECF109500E610A7 /* AlertControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControl.swift; sourceTree = "<group>"; };
 		249F2BB01ECC29890005F9AF /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		249F2BB41ECC2FDC0005F9AF /* TeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
 		249F2BB51ECC2FDC0005F9AF /* TeamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamCell.xib; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 		245DA9291ECC93FA00A37705 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				249590D61ECF109500E610A7 /* AlertControl.swift */,
 				245DA92A1ECC940D00A37705 /* CircularTransition.swift */,
 				249F2BB01ECC29890005F9AF /* extension.swift */,
 			);
@@ -306,6 +309,7 @@
 				24D68FD41ECAFDB6008ACFF5 /* FeedVC.swift in Sources */,
 				24D68FB91ECAD79E008ACFF5 /* AppDelegate.swift in Sources */,
 				24757A8E1ECEA2DA0081BFAE /* CommentsCell.swift in Sources */,
+				249590D71ECF109500E610A7 /* AlertControl.swift in Sources */,
 				249F2BB11ECC29890005F9AF /* extension.swift in Sources */,
 				24D68FD61ECB4B00008ACFF5 /* ProfileVC.swift in Sources */,
 				245DA92B1ECC940D00A37705 /* CircularTransition.swift in Sources */,

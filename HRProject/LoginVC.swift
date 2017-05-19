@@ -31,11 +31,11 @@ class LoginVC: UIViewController {
     func login() {
       
       
-      let username = "mak@gmail.com"
+      let username = "gg@gg.com"
       let password = "12345678"
       
       
-      let url = URL(string: "http://192.168.1.122:3000/api/v1/sessions")
+      let url = URL(string: "http://192.168.1.45:3001/api/v1/sessions")
       var urlRequest = URLRequest(url: url!)
       
       urlRequest.httpMethod = "POST"

@@ -17,12 +17,73 @@ class FeedVC: UIViewController {
       feedTableView.delegate = self
     }
   }
+  var feeds :[String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
-
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    feeds.removeAll()
+    fetchFeedback()
+  }
+//MARK: fetching data
+  func fetchFeedback(){
+    guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
+    
+    let url = URL(string: "http://192.168.1.45:3001/api/v1/feedbacks?private_token=\(validToken)")
+    
+    var urlRequest = URLRequest(url: url!)
+    urlRequest.httpMethod = "GET"
+    urlRequest.setValue("application/json", forHTTPHeaderField: "Content-type")
+    
+    let urlSession = URLSession(configuration: URLSessionConfiguration.default)
+    
+    let dataTask = urlSession.dataTask(with: urlRequest) { (data, response, error) in
+      
+      
+      if let validError = error {
+        
+        print(validError.localizedDescription)
+      }
+      
+      
+      if let httpResponse = response as? HTTPURLResponse {
+        
+        if httpResponse.statusCode == 200 {
+          
+          do {
+            let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+            print (jsonResponse)
+            
+            guard let validJSON = jsonResponse as? [[String:Any]] else { return }
+            
+            for feed in validJSON{
+              self.feeds.append(feed["feed"] as! String ?? "No data")
+            
+            }
+              
+            
+            
+            DispatchQueue.main.async {
+              self.feedTableView.reloadData()
+            }
+            
+          } catch let jsonError as NSError {
+            
+          }
+          
+        }
+      }
+      
+    }
+    
+    dataTask.resume()
+    
+    
+  
+  }
  //MARK: Like Animation
   fileprivate func generateAnimatedViews(cellLocation: CGPoint, imageLocation:CGPoint){
   
@@ -62,7 +123,7 @@ class FeedVC: UIViewController {
 extension FeedVC : UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    return 15 // number of posts +1 (1 for MynewPost)
+    return feeds.count + 1
     
     
   }
@@ -75,6 +136,8 @@ extension FeedVC : UITableViewDataSource{
     else{
       guard let cell = tableView.dequeueReusableCell(withIdentifier: FeedCell.cellIdentifier, for: indexPath) as? FeedCell else {  return UITableViewCell()}
       cell.selectionStyle = .none
+      
+      cell.feedLabel.text = feeds[indexPath.row]
       cell.delegate = self
       return cell
     }
