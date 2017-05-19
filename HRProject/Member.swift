@@ -30,7 +30,6 @@ class Member {
       }
     
     self.department = dictionary["department"] as? String
-    self.privilege = dictionary["privilege"] as? String
     self.title = dictionary["title"] as? String
     
   }
