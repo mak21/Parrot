@@ -13,7 +13,6 @@ class ProfileVC: UIViewController{
   
   
   @IBOutlet weak var positive_attitudeView: CosmosView!
-  
   @IBOutlet weak var critical_thinkingView: CosmosView!
   @IBOutlet weak var teamworkView: CosmosView!
   @IBOutlet weak var responsibilityView: CosmosView!
@@ -60,6 +59,13 @@ class ProfileVC: UIViewController{
     present(controller, animated: true, completion: nil)
   }
   func setupUI(){
+    // shadow for glowing 
+    commentButton.layer.shadowColor = UIColor.blue.cgColor
+    commentButton.layer.shadowRadius = 4.0
+    commentButton.layer.shadowOpacity = 0.4
+    commentButton.layer.shadowOffset = CGSize.zero
+    //
+    commentButton.layer.masksToBounds = false
     commentButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
     positive_attitudeView.settings.fillMode = .half
     teamworkView.settings.fillMode = .half
@@ -139,7 +145,7 @@ class ProfileVC: UIViewController{
               self.creativityView.rating = self.creativitySum / Double(self.ratings.count)
             }
             
-          } catch let jsonError as NSError {
+          } catch _ as NSError {
             
           }
           

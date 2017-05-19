@@ -60,7 +60,7 @@ class FeedVC: UIViewController {
             guard let validJSON = jsonResponse as? [[String:Any]] else { return }
             
             for feed in validJSON{
-              self.feeds.append(feed["feed"] as! String ?? "No data")
+              self.feeds.append(feed["feed"] as? String ?? "No data")
             
             }
               
@@ -70,7 +70,7 @@ class FeedVC: UIViewController {
               self.feedTableView.reloadData()
             }
             
-          } catch let jsonError as NSError {
+          } catch _ as NSError {
             
           }
           
@@ -131,13 +131,15 @@ extension FeedVC : UITableViewDataSource{
     if indexPath.row == 0{
       guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.cellIdentifier, for: indexPath) as? PostCell else {  return UITableViewCell()}
       cell.selectionStyle = .none
+      //cell.profileImageView.loadImageUsingCacheWithUrlString()
+      cell.delegate = self
       return cell
     }
     else{
       guard let cell = tableView.dequeueReusableCell(withIdentifier: FeedCell.cellIdentifier, for: indexPath) as? FeedCell else {  return UITableViewCell()}
       cell.selectionStyle = .none
       
-      cell.feedLabel.text = feeds[indexPath.row]
+      cell.feedLabel.text = feeds[indexPath.row - 1] // to start from index 0
       cell.delegate = self
       return cell
     }
@@ -161,6 +163,14 @@ extension FeedVC : FeedCellDelegate{
     }
   }
  
+}
+extension FeedVC: PostCellDelegate{
+  func didPost(isTapped: Bool) {
+    if isTapped{
+      feeds.removeAll()
+      fetchFeedback()
+    }
+  }
 }
 
 

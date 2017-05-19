@@ -7,7 +7,10 @@
 //
 
 import UIKit
-
+protocol PostCellDelegate: class {
+  func didPost(isTapped: Bool)
+  
+}
 class PostCell: UITableViewCell {
   @IBOutlet weak var postButton: UIButton!
   @IBOutlet weak var textView: UITextView!{
@@ -15,9 +18,11 @@ class PostCell: UITableViewCell {
       textView.delegate = self
     }
   }
+ 
   @IBOutlet weak var profileImageView: UIImageView!
   static let cellIdentifier = "PostCell"
   static let cellNib = UINib(nibName: PostCell.cellIdentifier, bundle: Bundle.main)
+   weak var delegate : PostCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
       setupPlaceHolder()
@@ -66,19 +71,21 @@ class PostCell: UITableViewCell {
         if httpResponse.statusCode == 200 {
           
           do {
-            let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+            _ = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
             DispatchQueue.main.async {
               self.setupPlaceHolder()
             }
-          } catch let jsonError as NSError {
+          } catch _ as NSError {
           }
         }
       }
       
     }
     dataTask.resume()
+    
+     delegate?.didPost(isTapped: true)
   }
-  
+ 
 }
 extension PostCell: UITextViewDelegate{
   

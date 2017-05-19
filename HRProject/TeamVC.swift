@@ -92,7 +92,7 @@ class TeamVC: UIViewController {
             DispatchQueue.main.async {
               self.teamTableView.reloadData()
             }
-          } catch let jsonError as NSError {
+          } catch _ as NSError {
             
           }
           
@@ -222,11 +222,11 @@ class TeamVC: UIViewController {
         if httpResponse.statusCode == 200 {
           
           do {
-            let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
+            _ = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
             
             
             
-          } catch let jsonError as NSError {
+          } catch _ as NSError {
             
           }
           

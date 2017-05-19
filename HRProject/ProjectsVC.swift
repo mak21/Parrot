@@ -67,7 +67,7 @@ var projects :[Any] = []
               self.projectsTableView.reloadData()
             }
             
-          } catch let jsonError as NSError {
+          } catch _ as NSError {
             
           }
           
@@ -89,7 +89,7 @@ extension ProjectsVC : UITableViewDataSource{
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {return UITableViewCell()}
-    cell.textLabel?.text = projects[indexPath.row] as! String
+    cell.textLabel?.text = projects[indexPath.row] as? String
     return cell
   }
   

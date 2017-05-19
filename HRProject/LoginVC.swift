@@ -89,7 +89,7 @@ class LoginVC: UIViewController {
               
               print(jsonResponse)
               
-            } catch let jsonError as NSError {
+            } catch _ as NSError {
               
             }
             
