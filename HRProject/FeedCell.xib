@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCI-1u-3P6">
-                        <rect key="frame" x="8" y="8" width="304" height="37"/>
+                        <rect key="frame" x="8" y="8" width="304" height="36"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="kTL-4K-CLd"/>
                         </constraints>
@@ -28,21 +28,14 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thumbs_up" translatesAutoresizingMaskIntoConstraints="NO" id="Yre-8X-p8r">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="thumbs_up" translatesAutoresizingMaskIntoConstraints="NO" id="Yre-8X-p8r">
                         <rect key="frame" x="14" y="71" width="25" height="25"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="25" id="g4l-zK-uYv"/>
-                            <constraint firstAttribute="width" constant="25" id="sS1-Nd-dah"/>
-                        </constraints>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="Yre-8X-p8r" secondAttribute="bottom" constant="3.5" id="1df-Qe-3gY"/>
-                    <constraint firstItem="Yre-8X-p8r" firstAttribute="top" secondItem="qCI-1u-3P6" secondAttribute="bottom" constant="26" id="IFS-No-gsb"/>
-                    <constraint firstItem="Yre-8X-p8r" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="14" id="Jdg-Jl-NZ6"/>
                     <constraint firstItem="qCI-1u-3P6" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Xi3-bX-WAz"/>
                     <constraint firstItem="qCI-1u-3P6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="gNQ-T0-2uo"/>
-                    <constraint firstAttribute="trailing" secondItem="Yre-8X-p8r" secondAttribute="trailing" constant="281" id="nRU-ut-8sI"/>
                     <constraint firstItem="qCI-1u-3P6" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="njh-5Z-Rbi"/>
                 </constraints>
             </tableViewCellContentView>

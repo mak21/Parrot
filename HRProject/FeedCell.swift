@@ -8,7 +8,7 @@
 
 import UIKit
 protocol FeedCellDelegate: class {
-  func didSelectThumbUp(isTapped: Bool)
+  func didSelectThumbUp(isTapped: Bool, cellLocation: CGPoint, imageLocation : CGPoint)
  
 }
 class FeedCell: UITableViewCell {
@@ -31,8 +31,11 @@ class FeedCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-  func handleThumbUP(){
-      delegate?.didSelectThumbUp(isTapped: true)
+  func handleThumbUP(sender: UITapGestureRecognizer ){
+    let cellLocation = sender.location(in: self.superview)
+    let imageLocation = sender.location(in: self)
+    
+      delegate?.didSelectThumbUp(isTapped: true, cellLocation: cellLocation, imageLocation: imageLocation)
     }
   
 

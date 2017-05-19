@@ -24,13 +24,14 @@ class FeedVC: UIViewController {
     }
 
  //MARK: Like Animation
-  fileprivate func generateAnimatedViews(){
+  fileprivate func generateAnimatedViews(cellLocation: CGPoint, imageLocation:CGPoint){
+  
     let image = drand48() > 0.5 ? #imageLiteral(resourceName: "thumbs_up") : #imageLiteral(resourceName: "heart")
     let imageView = UIImageView(image: image)
     let dimension = 20 + drand48() * 10  //drand48()give randomnumber from 0 to 1
     imageView.frame = CGRect(x: 0, y: 0, width: dimension , height: dimension)
     let animation = CAKeyframeAnimation(keyPath: "position")
-    animation.path = customPath().cgPath
+    animation.path = customPath(cellLocation: cellLocation, imageLocation: imageLocation).cgPath
     animation.duration = 2 + drand48() * 3
     animation.fillMode = kCAFillModeForwards
     
@@ -39,15 +40,19 @@ class FeedVC: UIViewController {
     imageView.layer.add(animation, forKey: nil)
     
     view.addSubview(imageView)
+    
+    //animation.delegate = self
   }
-func customPath()->UIBezierPath{
+  func customPath(cellLocation:CGPoint,imageLocation:CGPoint)->UIBezierPath{
   let path = UIBezierPath()
-  path.move(to: CGPoint(x: 0, y: 300))
-  
-  let endPoint = CGPoint(x: 400, y: 300)
+    
+  //path.move(to: CGPoint(x: 14, y: cellLocation.y + 71))
+  path.move(to: CGPoint(x: imageLocation.x, y: cellLocation.y + imageLocation.y))
+  //let endPoint = CGPoint(x: 400, y: cellLocation.y + 71)
+    let endPoint = CGPoint(x: 400, y: cellLocation.y + imageLocation.y)
   let randomYShift = 200 + drand48() * 300
-  let cp1 = CGPoint(x: 100 , y: 200 - randomYShift)
-  let cp2 = CGPoint(x: 200 , y: 300 + randomYShift)
+    let cp1 = CGPoint(x: 100 , y: Double(cellLocation.y) - randomYShift)
+  let cp2 = CGPoint(x: 200 , y: Double(cellLocation.y) + randomYShift)
   
   path.addCurve(to: endPoint, controlPoint1: cp1, controlPoint2: cp2)
   return path
@@ -85,14 +90,14 @@ extension FeedVC : UITableViewDelegate{
   }
 }
 extension FeedVC : FeedCellDelegate{
-  func didSelectThumbUp(isTapped: Bool) {
+  func didSelectThumbUp(isTapped: Bool, cellLocation: CGPoint, imageLocation: CGPoint) {
     if isTapped{
       (0...10).forEach { (_) in
-        generateAnimatedViews()
+        generateAnimatedViews(cellLocation: cellLocation, imageLocation: imageLocation)
       }
     }
   }
-  func didSelectThumbDown(isTapped: Bool) {
-    
-  }
+ 
 }
+
+
