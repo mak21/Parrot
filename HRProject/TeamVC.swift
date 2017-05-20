@@ -19,7 +19,11 @@ class TeamVC: UIViewController {
   @IBOutlet weak var ratingButton: UIButton!
   @IBOutlet var ratingView: UIView!
 
-  @IBOutlet weak var commentTextView: UITextView!
+  @IBOutlet weak var commentTextView: UITextView!{
+    didSet{
+      commentTextView.delegate = self
+    }
+  }
   @IBOutlet weak var selectedPersonNameLabel: UILabel!
   @IBOutlet weak var categoryLabel: UILabel!
   @IBOutlet weak var cosomosRateView: CosmosView!
@@ -31,6 +35,7 @@ class TeamVC: UIViewController {
   teamTableView.delegate = self
   }
 }
+  
   var effect :UIVisualEffect!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +50,8 @@ class TeamVC: UIViewController {
     }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    
+    
     fetchMembers(groupId: groupId)
   }
   override func viewDidDisappear(_ animated: Bool) {
@@ -118,7 +125,8 @@ class TeamVC: UIViewController {
     if self.categories[self.i] == "comment"{
       
       self.ratingDict [self.categories[self.i]] = self.commentTextView.text
-      self.commentTextView.text = ""
+      commentTextView.text = "Please leave a comment..."
+      commentTextView.textColor = UIColor.darkGray
       self.ratingDict["status"] = true
     }
   }
@@ -143,6 +151,7 @@ class TeamVC: UIViewController {
   
   
   func animateOut () {
+     navigationController?.navigationBar.isHidden = false
      visualEffectView.isHidden = true
     UIView.animate(withDuration: 0.3, animations: {
       self.ratingView.transform = CGAffineTransform.init(scaleX: 1.3, y: 1.3)
@@ -168,17 +177,17 @@ class TeamVC: UIViewController {
       print(ratingDict)
       
       sendRating()
+      
       animateOut()
     }else
     if i == 5 {
        ratingButton.setTitle("Submit", for: .normal)
       cosomosRateView.isHidden = true
       commentTextView.isHidden = false
+      
+      
       setupViewUI()
-//    }else if i == 6 {
-//      i = 5
-//      setupViewUI()
-//    }
+
     }else{
   
     setupViewUI()
@@ -244,15 +253,15 @@ class TeamVC: UIViewController {
 extension TeamVC : UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-   return members.count
+   return 2//members.count
   
    
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamCell.cellIdentifier, for: indexPath) as? TeamCell else {  return UITableViewCell()}
-    cell.nameLabel.text = members[indexPath.row].name
-    guard let url = members[indexPath.row].profileImageUrl else{return UITableViewCell()}
-  cell.profileImageView.loadImageUsingCacheWithUrlString(url)
+    cell.nameLabel.text = "sad"//members[indexPath.row].name
+   // guard let url = members[indexPath.row].profileImageUrl else{return UITableViewCell()}
+ // cell.profileImageView.loadImageUsingCacheWithUrlString(url)
     cell.accessoryType = .none
     return cell
   }
@@ -262,17 +271,36 @@ extension TeamVC : UITableViewDelegate{
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      let cell = tableView.cellForRow(at: indexPath)
     i = 0
-    self.ratingDict["ratee_id"] = members[indexPath.row].id
+   // self.ratingDict["ratee_id"] = members[indexPath.row].id
     setupViewUI()
-    selectedPersonNameLabel.text = members[indexPath.row].name
-    guard let url = members[indexPath.row].profileImageUrl else{return}
-    profileImageView.loadImageUsingCacheWithUrlString(url)
+   // selectedPersonNameLabel.text = members[indexPath.row].name
+   // guard let url = members[indexPath.row].profileImageUrl else{return}
+   // profileImageView.loadImageUsingCacheWithUrlString(url)
     if cell?.accessoryType == UITableViewCellAccessoryType.none{
     animateIn()
+      
     }
     cell?.accessoryType = .checkmark
+    tableView.deselectRow(at: indexPath, animated: true)
+   navigationController?.navigationBar.isHidden = true
   }
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 85
   }
 }
+extension TeamVC: UITextViewDelegate{
+  
+  func textViewDidBeginEditing(_ textView: UITextView) {
+    if commentTextView.textColor == UIColor.darkGray {
+      commentTextView.text = nil
+      commentTextView.textColor = UIColor.black
+    }
+  }
+  func textViewDidEndEditing(_ textView: UITextView) {
+    if commentTextView.text.isEmpty {
+      commentTextView.text = "Placeholder"
+      commentTextView.textColor = UIColor.darkGray
+    }
+}
+}
+

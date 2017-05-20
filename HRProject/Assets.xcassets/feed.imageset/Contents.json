@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "beautiful-1274051_960_720.jpg",
+      "filename" : "home24x.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "home48x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "home64x.png",
       "scale" : "3x"
     }
   ],

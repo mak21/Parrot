@@ -9,9 +9,10 @@
 import UIKit
 
 class ProjectsVC: UIViewController {
-var projects :[Any] = []
+var projects :[Any] = ["hi","why"]
   var idsDict : [String: Int] = [:]
   
+  @IBOutlet weak var segmentedControler: UISegmentedControl!
   @IBOutlet weak var projectsTableView: UITableView!{
     didSet{
       projectsTableView.register(ProjectCell.cellNib, forCellReuseIdentifier: ProjectCell.cellIdentifier)
@@ -31,8 +32,9 @@ var projects :[Any] = []
     }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    projects.removeAll()
-     fetchProjects()
+    
+   // projects.removeAll()
+   //  fetchProjects()
   }
   func fetchProjects(){
     
@@ -114,11 +116,12 @@ extension ProjectsVC : UITableViewDelegate{
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 135
   }
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TeamVC")as! TeamVC
-    
-   controller.groupId = self.idsDict[projects[indexPath.row] as! String]!
-    present(controller, animated: true, completion: nil)
+    tableView.deselectRow(at: indexPath, animated: true)
+  // controller.groupId = self.idsDict[projects[indexPath.row] as! String]!
+    navigationController?.pushViewController(controller, animated: true)
     
     
   }

@@ -56,7 +56,7 @@ class ProfileVC: UIViewController{
  
   @IBAction func logOutButtonTapped(_ sender: Any) {
     let defaults = UserDefaults.standard
-    defaults.removeObject(forKey: "AUTH_Token")
+    defaults.removeObject(forKey: "AUTH_TOKEN")
     defaults.synchronize()
     let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginVC")
     present(controller, animated: true, completion: nil)

@@ -11,11 +11,21 @@ import UIKit
 class LoginVC: UIViewController {
 
     
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordtextField: UITextField!
+  @IBOutlet weak var emailTextField: UITextField!{
+    didSet{
+      emailTextField.delegate = self
+    }
+  }
+  @IBOutlet weak var passwordtextField: UITextField!{
+    didSet{
+      passwordtextField.delegate = self
+    }
+  }
     
     @IBOutlet weak var buttonLogin: UIButton! {
       didSet{
+        buttonLogin.layer.cornerRadius = 5
+        buttonLogin.layer.masksToBounds = true
         buttonLogin.addTarget(self, action: #selector(login), for: .touchUpInside)
       }
     }
@@ -26,11 +36,14 @@ class LoginVC: UIViewController {
   
     }
     
-  
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
+  }
     
     func login() {
       
-      
+//      guard let username = emailTextField.text,
+//      let password = passwordtextField.text else {return}
       let username = "gg@gg.com"
       let password = "12345678"
       
@@ -114,6 +127,11 @@ class LoginVC: UIViewController {
   }
   
 
-  
+extension LoginVC : UITextFieldDelegate{
+  public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    self.view.endEditing(true)
+    return true
+  }
+}
 
 
