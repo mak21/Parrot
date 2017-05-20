@@ -16,10 +16,12 @@ class CommentsVC: UIViewController {
       commentsTableView.delegate = self
     }
   }
+ 
   var comments : [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-
+      commentsTableView.backgroundColor = .lightGray
+      commentsTableView.separatorStyle = .none
         // Do any additional setup after loading the view.
     }
   override func viewWillDisappear(_ animated: Bool) {
@@ -43,6 +45,13 @@ extension CommentsVC : UITableViewDataSource{
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: CommentsCell.cellIdentifier, for: indexPath) as? CommentsCell else {  return UITableViewCell()}
    cell.commentLabel.text = comments[indexPath.row]
+    //layout
+    cell.backgroundColor = .clear
+    cell.contentView.backgroundColor = .clear
+    cell.containerView.backgroundColor = .white
+    cell.containerView.layer.cornerRadius = 8.0
+    cell.containerView.layer.masksToBounds = true
+    
     return cell
   }
   

@@ -78,7 +78,7 @@ class ProfileVC: UIViewController{
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.122:3000/api/v1/users/0?private_token=\(validToken)")
+    let url = URL(string: "http://192.168.1.45:3001/api/v1/users/0?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"

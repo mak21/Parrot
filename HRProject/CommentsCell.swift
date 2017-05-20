@@ -11,6 +11,7 @@ import UIKit
 class CommentsCell: UITableViewCell {
   static let cellIdentifier = "CommentsCell"
   static let cellNib = UINib(nibName: CommentsCell.cellIdentifier, bundle: Bundle.main)
+  @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var commentLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()

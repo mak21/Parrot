@@ -42,7 +42,9 @@ class PostCell: UITableViewCell {
   func handlePost(){
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
+    
     let url = URL(string: "http://192.168.1.45:3001/api/v1/feedbacks?private_token=\(validToken)")
+    print(validToken)
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "POST"
     urlRequest.setValue("application/json", forHTTPHeaderField: "Content-type")
@@ -75,6 +77,9 @@ class PostCell: UITableViewCell {
             DispatchQueue.main.async {
               self.setupPlaceHolder()
             }
+            DispatchQueue.main.async {
+              self.delegate?.didPost(isTapped: true)
+            }
           } catch _ as NSError {
           }
         }
@@ -83,7 +88,6 @@ class PostCell: UITableViewCell {
     }
     dataTask.resume()
     
-     delegate?.didPost(isTapped: true)
   }
  
 }

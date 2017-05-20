@@ -11,7 +11,7 @@ import UIKit
 class ProjectsVC: UIViewController {
 var projects :[Any] = []
   var idsDict : [String: Int] = [:]
-  var members : [Member] = []
+  
   @IBOutlet weak var projectsTableView: UITableView!{
     didSet{
       projectsTableView.dataSource = self
@@ -21,14 +21,17 @@ var projects :[Any] = []
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchProjects()
     }
-
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    projects.removeAll()
+     fetchProjects()
+  }
   func fetchProjects(){
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.122:3000/api/v1/projects?private_token=\(validToken)")
+    let url = URL(string: "http://192.168.1.45:3001/api/v1/projects?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
