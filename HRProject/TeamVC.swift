@@ -118,6 +118,7 @@ class TeamVC: UIViewController {
     if self.categories[self.i] == "comment"{
       
       self.ratingDict [self.categories[self.i]] = self.commentTextView.text
+      self.commentTextView.text = ""
       self.ratingDict["status"] = true
     }
   }

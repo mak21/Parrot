@@ -17,16 +17,25 @@ class FeedVC: UIViewController {
       feedTableView.delegate = self
     }
   }
+  var refresher :UIRefreshControl = UIRefreshControl()
   var feeds :[String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+      feedTableView.refreshControl = refresher
+      refresher.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+      refresher.tintColor = UIColor.orange
+      
+      
     }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     feeds.removeAll()
     fetchFeedback()
+  }
+  func refreshData(){
+    feeds.removeAll()
+    fetchFeedback()
+    refresher.endRefreshing()
   }
 //MARK: fetching data
   func fetchFeedback(){

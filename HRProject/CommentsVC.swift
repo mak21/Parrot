@@ -14,14 +14,15 @@ class CommentsVC: UIViewController {
       commentsTableView.register(CommentsCell.cellNib, forCellReuseIdentifier: CommentsCell.cellIdentifier)
       commentsTableView.dataSource = self
       commentsTableView.delegate = self
+      commentsTableView.backgroundColor = .lightGray
+      commentsTableView.separatorStyle = .none
     }
   }
  
   var comments : [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
-      commentsTableView.backgroundColor = .lightGray
-      commentsTableView.separatorStyle = .none
+     
         // Do any additional setup after loading the view.
     }
   override func viewWillDisappear(_ animated: Bool) {
