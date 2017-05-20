@@ -14,10 +14,10 @@ var projects :[Any] = []
   
   @IBOutlet weak var projectsTableView: UITableView!{
     didSet{
-      projectsTableView.register(CommentsCell.cellNib, forCellReuseIdentifier: CommentsCell.cellIdentifier)
+      projectsTableView.register(ProjectCell.cellNib, forCellReuseIdentifier: ProjectCell.cellIdentifier)
       projectsTableView.dataSource = self
       projectsTableView.delegate = self
-      projectsTableView.backgroundColor = .lightGray
+      projectsTableView.backgroundColor = UIColor(red: 241/255, green: 241/255, blue: 241/255, alpha: 1)
       projectsTableView.separatorStyle = .none
     }
   }
@@ -98,8 +98,8 @@ extension ProjectsVC : UITableViewDataSource{
     return projects.count
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     guard let cell = tableView.dequeueReusableCell(withIdentifier: CommentsCell.cellIdentifier, for: indexPath) as? CommentsCell else {  return UITableViewCell()}
-    cell.commentLabel.text = projects[indexPath.row] as? String
+     guard let cell = tableView.dequeueReusableCell(withIdentifier: ProjectCell.cellIdentifier, for: indexPath) as? ProjectCell else {  return UITableViewCell()}
+    cell.projectNameLabel.text = projects[indexPath.row] as? String
     //layout
     cell.backgroundColor = .clear
     cell.contentView.backgroundColor = .clear
@@ -111,11 +111,15 @@ extension ProjectsVC : UITableViewDataSource{
   
 }
 extension ProjectsVC : UITableViewDelegate{
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 135
+  }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TeamVC")as! TeamVC
     
    controller.groupId = self.idsDict[projects[indexPath.row] as! String]!
+    present(controller, animated: true, completion: nil)
     
-    navigationController?.pushViewController(controller, animated: true)
+    
   }
 }

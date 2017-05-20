@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2453A4021ED035E90068E7FC /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2453A4011ED035E90068E7FC /* GradientView.swift */; };
+		2453A4051ED056220068E7FC /* ProjectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2453A4031ED056220068E7FC /* ProjectCell.swift */; };
+		2453A4061ED056220068E7FC /* ProjectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2453A4041ED056220068E7FC /* ProjectCell.xib */; };
 		245DA9281ECC936B00A37705 /* CommentsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DA9271ECC936B00A37705 /* CommentsVC.swift */; };
 		245DA92B1ECC940D00A37705 /* CircularTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245DA92A1ECC940D00A37705 /* CircularTransition.swift */; };
 		24757A8E1ECEA2DA0081BFAE /* CommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24757A8C1ECEA2DA0081BFAE /* CommentsCell.swift */; };
@@ -35,6 +38,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2453A4011ED035E90068E7FC /* GradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		2453A4031ED056220068E7FC /* ProjectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCell.swift; sourceTree = "<group>"; };
+		2453A4041ED056220068E7FC /* ProjectCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectCell.xib; sourceTree = "<group>"; };
 		245DA9271ECC936B00A37705 /* CommentsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsVC.swift; sourceTree = "<group>"; };
 		245DA92A1ECC940D00A37705 /* CircularTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularTransition.swift; sourceTree = "<group>"; };
 		24757A8C1ECEA2DA0081BFAE /* CommentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsCell.swift; sourceTree = "<group>"; };
@@ -81,6 +87,7 @@
 		245DA9291ECC93FA00A37705 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
+				2453A4011ED035E90068E7FC /* GradientView.swift */,
 				249590D61ECF109500E610A7 /* AlertControl.swift */,
 				245DA92A1ECC940D00A37705 /* CircularTransition.swift */,
 				249F2BB01ECC29890005F9AF /* extension.swift */,
@@ -108,6 +115,8 @@
 				24A401491ECD948200E2E290 /* PostCell.xib */,
 				24757A8C1ECEA2DA0081BFAE /* CommentsCell.swift */,
 				24757A8D1ECEA2DA0081BFAE /* CommentsCell.xib */,
+				2453A4031ED056220068E7FC /* ProjectCell.swift */,
+				2453A4041ED056220068E7FC /* ProjectCell.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -247,6 +256,7 @@
 				24D68FBE1ECAD79E008ACFF5 /* Main.storyboard in Resources */,
 				24A401471ECD916E00E2E290 /* FeedCell.xib in Resources */,
 				24757A8F1ECEA2DA0081BFAE /* CommentsCell.xib in Resources */,
+				2453A4061ED056220068E7FC /* ProjectCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -312,7 +322,9 @@
 				249590D71ECF109500E610A7 /* AlertControl.swift in Sources */,
 				249F2BB11ECC29890005F9AF /* extension.swift in Sources */,
 				24D68FD61ECB4B00008ACFF5 /* ProfileVC.swift in Sources */,
+				2453A4051ED056220068E7FC /* ProjectCell.swift in Sources */,
 				245DA92B1ECC940D00A37705 /* CircularTransition.swift in Sources */,
+				2453A4021ED035E90068E7FC /* GradientView.swift in Sources */,
 				24D68FD01ECAFC2A008ACFF5 /* ProjectsVC.swift in Sources */,
 				24A401461ECD916E00E2E290 /* FeedCell.swift in Sources */,
 				24D68FCB1ECAD9C0008ACFF5 /* LoginVC.swift in Sources */,

@@ -36,6 +36,9 @@ class ProfileVC: UIViewController{
     
       setupUI()
       profileImage.circlerImage()
+      profileImage.layer.borderWidth = 3.0
+      profileImage.layer.borderColor = UIColor.orange.cgColor
+     
      
     }
   override func viewWillAppear(_ animated: Bool) {
