@@ -63,10 +63,10 @@ class ProfileVC: UIViewController{
   }
   func setupUI(){
     // shadow for glowing 
-    commentButton.layer.shadowColor = UIColor.blue.cgColor
-    commentButton.layer.shadowRadius = 4.0
-    commentButton.layer.shadowOpacity = 0.4
-    commentButton.layer.shadowOffset = CGSize.zero
+//    commentButton.layer.shadowColor = UIColor.blue.cgColor
+//    commentButton.layer.shadowRadius = 4.0
+//    commentButton.layer.shadowOpacity = 0.4
+//    commentButton.layer.shadowOffset = CGSize.zero
     //
     commentButton.layer.masksToBounds = false
     commentButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)

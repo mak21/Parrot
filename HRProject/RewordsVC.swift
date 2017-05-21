@@ -13,6 +13,7 @@ var is1Tapped = true
 var is2Tapped = true
 var is3Tapped = true
   
+  @IBOutlet weak var congLabel: UILabel!
   @IBOutlet weak var gift1ImageView: UIImageView!{
     didSet{
       let gift1Gesture = UITapGestureRecognizer(target: self, action: #selector(gift1Tapped(_:)))
@@ -84,7 +85,8 @@ var is3Tapped = true
   }
   func gift3Tapped(_ gesture : UITapGestureRecognizer){
     transform3toCenter()
-    UIView.transition(with: gift3ImageView, duration: 2.0, options: .transitionFlipFromRight, animations: {
+    
+    UIView.transition(with: self.gift3ImageView, duration: 2.0, options: .transitionFlipFromRight, animations: {
       if(self.is3Tapped){
         self.gift3ImageView.image = #imageLiteral(resourceName: "starbucks")
         self.is3Tapped = !self.is3Tapped
@@ -95,8 +97,8 @@ var is3Tapped = true
       self.gift1ImageView.isHidden = true
       self.gift2ImageView.isHidden = true
     }, completion: nil)
-    
-    
+    //self.congLabel.text = "Congratulations you can redeem your prize at the HR office."
+  
   }
   func transform1toCenter(){
     UIView.animate(withDuration: 1.0, delay: 0.0, options: [.transitionCurlDown], animations: {

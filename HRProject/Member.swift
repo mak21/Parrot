@@ -20,7 +20,7 @@ class Member {
     
    
       
-    self.id = dictionary["id"] as? Int
+    self.id = dictionary["id"] as? Int ?? 0
     self.name = dictionary["full_name"] as? String
     self.email = dictionary["email"] as? String
       guard let images = dictionary["avatar"] as? [String:Any] else{return }

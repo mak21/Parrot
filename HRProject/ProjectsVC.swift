@@ -9,7 +9,8 @@
 import UIKit
 
 class ProjectsVC: UIViewController {
-var projects :[Any] = []
+//var projects :[Any] = []
+  var projects :[Any] = ["project1","project2","project3"]
   var idsDict : [String: Int] = [:]
   
   @IBOutlet weak var segmentedControler: UISegmentedControl!
@@ -25,17 +26,17 @@ var projects :[Any] = []
     override func viewDidLoad() {
         super.viewDidLoad()
     
- //navigationController?.navigationBar.barTintColor = UIColor.red
     navigationController?.navigationBar.barTintColor = UIColor(red: 59/255, green: 89/255, blue: 152/255, alpha: 1)
       navigationController?.view.backgroundColor = UIColor.clear
       navigationController?.navigationBar.isTranslucent = true
     }
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    projects.removeAll()
-     fetchProjects()
-  }
+  
+//  override func viewWillAppear(_ animated: Bool) {
+//    super.viewWillAppear(animated)
+//    
+//    projects.removeAll()
+//     fetchProjects()
+//  }
   func fetchProjects(){
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
