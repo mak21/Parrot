@@ -14,7 +14,7 @@ class CommentsVC: UIViewController {
       commentsTableView.register(CommentsCell.cellNib, forCellReuseIdentifier: CommentsCell.cellIdentifier)
       commentsTableView.dataSource = self
       commentsTableView.delegate = self
-      commentsTableView.backgroundColor = .lightGray
+      commentsTableView.backgroundColor = UIColor(red: 241/255, green: 241/255, blue: 241/255, alpha: 1)
       commentsTableView.separatorStyle = .none
     }
   }

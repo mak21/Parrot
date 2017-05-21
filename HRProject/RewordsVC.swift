@@ -39,8 +39,8 @@ var is3Tapped = true
     }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    self.gift1ImageView.frame = CGRect(x: 112, y: 88, width: 150, height: 150)
-    self.gift3ImageView.frame = CGRect(x: 112, y: 442, width: 150, height: 150)
+    self.gift1ImageView.frame = CGRect(x: 39, y: 394, width: 100, height: 100)
+    self.gift3ImageView.frame = CGRect(x: 220, y: 394, width: 100, height: 100)
     self.gift1ImageView.isHidden = false
     self.gift2ImageView.isHidden = false
     self.gift3ImageView.isHidden = false

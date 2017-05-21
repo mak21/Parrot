@@ -51,7 +51,7 @@ class ProfileVC: UIViewController{
     responsibilitySum = 0.0
     teamworkSum = 0.0
     critical_thinkingSum = 0.0
-    //fetchUserData()
+    fetchUserData()
   }
  
   @IBAction func logOutButtonTapped(_ sender: Any) {
@@ -81,7 +81,7 @@ class ProfileVC: UIViewController{
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://h-project.herokuapp.com/api/v1/users/0?private_token=\(validToken)")
+    let url = URL(string: "http://192.168.1.45:3001/api/v1/users/0?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -115,6 +115,7 @@ class ProfileVC: UIViewController{
               self.currentUser = Member(dictionary: userDict)
             
             for r in ratingDicts{
+              
               let rate = Rate(dictionary: r)
                self.ratings.append(rate)
             }
@@ -140,12 +141,14 @@ class ProfileVC: UIViewController{
                 self.critical_thinkingSum += Double(r.critical_thinking!)
               }
               
+              if self.ratings.count != 0{
               self.positive_attitudeView.rating = self.positive_attitudeSum / Double(self.ratings.count)
               
               self.critical_thinkingView.rating = self.critical_thinkingSum / Double(self.ratings.count)
               self.teamworkView.rating = self.teamworkSum / Double(self.ratings.count)
               self.responsibilityView.rating = self.responsibilitySum / Double(self.ratings.count)
               self.creativityView.rating = self.creativitySum / Double(self.ratings.count)
+            }
             }
             
           } catch _ as NSError {

@@ -58,12 +58,14 @@ class TeamVC: UIViewController {
     super.viewDidDisappear(animated)
     members.removeAll()
   }
-
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
+  }
   func fetchMembers(groupId : Int){
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://h-project.herokuapp.com/api/v1/projects/\(groupId)?private_token=\(validToken)")
+    let url = URL(string: "http://192.168.1.45:3001/api/v1/projects/\(groupId)?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -199,7 +201,7 @@ class TeamVC: UIViewController {
   func sendRating() {
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://h-project.herokuapp.com/api/v1/projects/\(groupId)?private_token=\(validToken)")
+    let url = URL(string: "http://http://192.168.1.45:3001/api/v1/projects/\(groupId)?private_token=\(validToken)")
     var urlRequest = URLRequest(url: url!)
     
     urlRequest.httpMethod = "PUT"
@@ -300,7 +302,10 @@ extension TeamVC: UITextViewDelegate{
     if commentTextView.text.isEmpty {
       commentTextView.text = "Placeholder"
       commentTextView.textColor = UIColor.darkGray
+      
     }
 }
+  
 }
+
 

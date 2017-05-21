@@ -9,7 +9,7 @@
 import UIKit
 
 class ProjectsVC: UIViewController {
-var projects :[Any] = ["hi","why"]
+var projects :[Any] = []
   var idsDict : [String: Int] = [:]
   
   @IBOutlet weak var segmentedControler: UISegmentedControl!
@@ -40,7 +40,7 @@ var projects :[Any] = ["hi","why"]
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://h-project.herokuapp.com/api/v1/projects?private_token=\(validToken)")
+    let url = URL(string: "http://192.168.1.45:3001/api/v1/projects?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -120,7 +120,7 @@ extension ProjectsVC : UITableViewDelegate{
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TeamVC")as! TeamVC
     tableView.deselectRow(at: indexPath, animated: true)
-   controller.groupId = self.idsDict[projects[indexPath.row] as! String]!
+   controller.groupId = self.idsDict[projects[indexPath.row] as! String] ?? 0
     navigationController?.pushViewController(controller, animated: true)
     
     

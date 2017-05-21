@@ -47,7 +47,7 @@ class FeedVC: UIViewController {
   func fetchFeedback(){
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://h-project.herokuapp.com/api/v1/feedbacks?private_token=\(validToken)")
+    let url = URL(string: "http://192.168.1.45:3001/api/v1/feedbacks?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -125,10 +125,11 @@ class FeedVC: UIViewController {
   //path.move(to: CGPoint(x: 14, y: cellLocation.y + 71))
   path.move(to: CGPoint(x: imageLocation.x, y: cellLocation.y + imageLocation.y))
   //let endPoint = CGPoint(x: 400, y: cellLocation.y + 71)
-    let endPoint = CGPoint(x: 400, y: cellLocation.y + imageLocation.y)
+    print("ceel",cellLocation,"image",imageLocation)
+    let endPoint = CGPoint(x: 400, y: cellLocation.y + imageLocation.y - 24)
   let randomYShift = 200 + drand48() * 300
-    let cp1 = CGPoint(x: 100 , y: Double(cellLocation.y) - randomYShift)
-  let cp2 = CGPoint(x: 200 , y: Double(cellLocation.y) + randomYShift)
+    let cp1 = CGPoint(x: 100 , y: Double(cellLocation.y ) - randomYShift)
+  let cp2 = CGPoint(x: 200 , y: Double(cellLocation.y ) + randomYShift)
   
   path.addCurve(to: endPoint, controlPoint1: cp1, controlPoint2: cp2)
   return path

@@ -28,7 +28,7 @@ extension UIImageView {
     }
     
     //otherwise fire off a new download
-    guard let url = URL(string: "http://h-project.herokuapp.com" + urlString) else {return}
+    guard let url = URL(string: "http://http://192.168.1.45:3001/" + urlString) else {return}
     URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
       
       //download hit an error so lets return out
