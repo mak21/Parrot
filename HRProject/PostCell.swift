@@ -12,6 +12,7 @@ protocol PostCellDelegate: class {
   
 }
 class PostCell: UITableViewCell {
+  @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var postButton: UIButton!
   @IBOutlet weak var textView: UITextView!{
     didSet{

@@ -51,7 +51,7 @@ class ProfileVC: UIViewController{
     responsibilitySum = 0.0
     teamworkSum = 0.0
     critical_thinkingSum = 0.0
-    fetchUserData()
+    //fetchUserData()
   }
  
   @IBAction func logOutButtonTapped(_ sender: Any) {
@@ -81,7 +81,7 @@ class ProfileVC: UIViewController{
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.45:3001/api/v1/users/0?private_token=\(validToken)")
+    let url = URL(string: "http://h-project.herokuapp.com/api/v1/users/0?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"

@@ -33,14 +33,14 @@ var projects :[Any] = ["hi","why"]
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-   // projects.removeAll()
-   //  fetchProjects()
+    projects.removeAll()
+     fetchProjects()
   }
   func fetchProjects(){
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.45:3001/api/v1/projects?private_token=\(validToken)")
+    let url = URL(string: "http://h-project.herokuapp.com/api/v1/projects?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -74,7 +74,7 @@ var projects :[Any] = ["hi","why"]
                 self.idsDict[(project["name"] as? String)!] = project["id"] as? Int
               
             }
-            // self.attendances = validJSON
+            
             DispatchQueue.main.async {
               self.projectsTableView.reloadData()
             }
@@ -120,7 +120,7 @@ extension ProjectsVC : UITableViewDelegate{
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TeamVC")as! TeamVC
     tableView.deselectRow(at: indexPath, animated: true)
-  // controller.groupId = self.idsDict[projects[indexPath.row] as! String]!
+   controller.groupId = self.idsDict[projects[indexPath.row] as! String]!
     navigationController?.pushViewController(controller, animated: true)
     
     

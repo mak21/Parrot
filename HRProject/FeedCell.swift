@@ -14,7 +14,7 @@ protocol FeedCellDelegate: class {
 class FeedCell: UITableViewCell {
   @IBOutlet weak var feedLabel: UILabel!
   @IBOutlet weak var thumbUpImage : UIImageView!
-  
+  @IBOutlet weak var containerView: UIView!
   weak var delegate : FeedCellDelegate?
   static let cellIdentifier = "FeedCell"
   static let cellNib = UINib(nibName: FeedCell.cellIdentifier, bundle: Bundle.main)

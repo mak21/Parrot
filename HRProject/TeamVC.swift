@@ -63,7 +63,7 @@ class TeamVC: UIViewController {
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.45:3001/api/v1/projects/\(groupId)?private_token=\(validToken)")
+    let url = URL(string: "http://h-project.herokuapp.com/api/v1/projects/\(groupId)?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -199,7 +199,7 @@ class TeamVC: UIViewController {
   func sendRating() {
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.45:3001/api/v1/projects/\(groupId)?private_token=\(validToken)")
+    let url = URL(string: "http://h-project.herokuapp.com/api/v1/projects/\(groupId)?private_token=\(validToken)")
     var urlRequest = URLRequest(url: url!)
     
     urlRequest.httpMethod = "PUT"
@@ -253,15 +253,15 @@ class TeamVC: UIViewController {
 extension TeamVC : UITableViewDataSource{
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-   return 2//members.count
+   return members.count
   
    
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamCell.cellIdentifier, for: indexPath) as? TeamCell else {  return UITableViewCell()}
-    cell.nameLabel.text = "sad"//members[indexPath.row].name
-   // guard let url = members[indexPath.row].profileImageUrl else{return UITableViewCell()}
- // cell.profileImageView.loadImageUsingCacheWithUrlString(url)
+    cell.nameLabel.text = members[indexPath.row].name
+    guard let url = members[indexPath.row].profileImageUrl else{return UITableViewCell()}
+  cell.profileImageView.loadImageUsingCacheWithUrlString(url)
     cell.accessoryType = .none
     return cell
   }
@@ -271,11 +271,11 @@ extension TeamVC : UITableViewDelegate{
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      let cell = tableView.cellForRow(at: indexPath)
     i = 0
-   // self.ratingDict["ratee_id"] = members[indexPath.row].id
+    self.ratingDict["ratee_id"] = members[indexPath.row].id
     setupViewUI()
-   // selectedPersonNameLabel.text = members[indexPath.row].name
-   // guard let url = members[indexPath.row].profileImageUrl else{return}
-   // profileImageView.loadImageUsingCacheWithUrlString(url)
+    selectedPersonNameLabel.text = members[indexPath.row].name
+    guard let url = members[indexPath.row].profileImageUrl else{return}
+    profileImageView.loadImageUsingCacheWithUrlString(url)
     if cell?.accessoryType == UITableViewCellAccessoryType.none{
     animateIn()
       

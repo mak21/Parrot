@@ -11,6 +11,8 @@ import UIKit
 class FeedVC: UIViewController {
   @IBOutlet weak var feedTableView: UITableView!{
     didSet{
+      feedTableView.backgroundColor = UIColor(red: 241/255, green: 241/255, blue: 241/255, alpha: 1)
+      feedTableView.separatorStyle = .none
       feedTableView.register(PostCell.cellNib, forCellReuseIdentifier: PostCell.cellIdentifier)
       feedTableView.register(FeedCell.cellNib, forCellReuseIdentifier: FeedCell.cellIdentifier)
       feedTableView.dataSource = self
@@ -27,10 +29,14 @@ class FeedVC: UIViewController {
       
       
     }
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     feeds.removeAll()
     fetchFeedback()
+  }
+  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    self.view.endEditing(true)
   }
   func refreshData(){
     feeds.removeAll()
@@ -41,7 +47,7 @@ class FeedVC: UIViewController {
   func fetchFeedback(){
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.45:3001/api/v1/feedbacks?private_token=\(validToken)")
+    let url = URL(string: "http://h-project.herokuapp.com/api/v1/feedbacks?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -142,6 +148,12 @@ extension FeedVC : UITableViewDataSource{
       cell.selectionStyle = .none
       //cell.profileImageView.loadImageUsingCacheWithUrlString()
       cell.delegate = self
+      //layout
+      cell.backgroundColor = .clear
+      cell.contentView.backgroundColor = .clear
+      cell.containerView.backgroundColor = .white
+      cell.containerView.layer.cornerRadius = 8.0
+      cell.containerView.layer.masksToBounds = true
       return cell
     }
     else{
@@ -150,6 +162,11 @@ extension FeedVC : UITableViewDataSource{
       
       cell.feedLabel.text = feeds[indexPath.row - 1] // to start from index 0
       cell.delegate = self
+      cell.backgroundColor = .clear
+      cell.contentView.backgroundColor = .clear
+      cell.containerView.backgroundColor = .white
+      cell.containerView.layer.cornerRadius = 8.0
+      cell.containerView.layer.masksToBounds = true
       return cell
     }
   
@@ -160,7 +177,7 @@ extension FeedVC : UITableViewDataSource{
 extension FeedVC : UITableViewDelegate{
  
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 115
+    return 160
   }
 }
 extension FeedVC : FeedCellDelegate{
