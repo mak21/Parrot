@@ -13,8 +13,10 @@ class ProjectsVC: UIViewController {
   var projects : [Project] = []
   //var projects :[Any] = ["project1","project2","project3"]
   var idsDict : [String: Int] = [:]
+  @IBOutlet var projectView: UIView!
+  @IBOutlet weak var visualEffectView: UIVisualEffectView!
+
   
-  @IBOutlet weak var segmentedControler: UISegmentedControl!
   @IBOutlet weak var projectsTableView: UITableView!{
     didSet{
       projectsTableView.register(ProjectCell.cellNib, forCellReuseIdentifier: ProjectCell.cellIdentifier)
@@ -24,9 +26,14 @@ class ProjectsVC: UIViewController {
       projectsTableView.separatorStyle = .none
     }
   }
+  var effect :UIVisualEffect!
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+      
+      
+      
+      
+      
     navigationController?.navigationBar.barTintColor = UIColor(red: 59/255, green: 89/255, blue: 152/255, alpha: 1)
       navigationController?.view.backgroundColor = UIColor.clear
       navigationController?.navigationBar.isTranslucent = true
@@ -38,6 +45,7 @@ class ProjectsVC: UIViewController {
     projects.removeAll()
      fetchProjects()
   }
+
   func fetchProjects(){
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
@@ -70,9 +78,10 @@ class ProjectsVC: UIViewController {
             guard let validJSON = jsonResponse as? [[String:Any]] else { return }
             
             for projects in validJSON{
+              
               let project = Project(dictionary: projects)
               
-              //self.projects.append(project["name"] ?? "No data")
+              //self.projects.apped(project["name"] ?? "No data")
               self.projects.append(project)
               
                 self.idsDict[(projects["name"] as? String)!] = projects["id"] as? Int
@@ -107,7 +116,13 @@ extension ProjectsVC : UITableViewDataSource{
      guard let cell = tableView.dequeueReusableCell(withIdentifier: ProjectCell.cellIdentifier, for: indexPath) as? ProjectCell else {  return UITableViewCell()}
    // cell.projectNameLabel.text = projects[indexPath.row] as? String
     cell.projectNameLabel.text = projects[indexPath.row].name
+    guard let urls = projects[indexPath.row].profileImagesUrl else {
+      return UITableViewCell()}
     
+    for  i in 1...3 {
+     cell.membersImages[i].loadImageUsingCacheWithUrlString(urls[i])
+    
+    }
     cell.createdDateLabel.text = projects[indexPath.row].dateCreated! + " - " + projects[indexPath.row].dateEnded!
     cell.endedDateLabel.text = ""
     //layout
@@ -128,8 +143,16 @@ extension ProjectsVC : UITableViewDelegate{
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TeamVC")as! TeamVC
     tableView.deselectRow(at: indexPath, animated: true)
-   //controller.groupId = self.idsDict[projects[indexPath.row] as! String] ?? 0
+   
     controller.groupId = self.projects[indexPath.row].id ?? 0
+    guard let start =  projects[indexPath.row].dateCreated,
+    let end = projects[indexPath.row].dateEnded,
+    let client = projects[indexPath.row].client,
+    let projectName = projects[indexPath.row].name else {return}
+    
+    controller.projectDate = start + " - " + end
+    controller.clientName = client
+    controller.projectName = projectName
     navigationController?.pushViewController(controller, animated: true)
     
     

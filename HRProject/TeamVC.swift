@@ -10,7 +10,14 @@ import UIKit
 import Cosmos
 class TeamVC: UIViewController {
   
-  //var members : [Member] = []
+
+  @IBOutlet weak var dateLabel: UILabel!
+  @IBOutlet weak var clientLabel: UILabel!
+  @IBOutlet weak var projectNameLabel: UILabel!
+  var projectDate = ""
+  var projectName = ""
+  var clientName = ""
+  
     var members : [Member] = []
   var groupId : Int = 0
   var ratingDict : [String:Any] = ["positive_attitude":0,"creativity":0,"responsibility":0,"teamwork":0,"critical_thinking":0,"comment":""]
@@ -43,17 +50,18 @@ class TeamVC: UIViewController {
         super.viewDidLoad()
       profileImageView.circlerImage()
       effect = visualEffectView.effect
-      //visualEffectView.effect = nil
      visualEffectView.isHidden = true
       ratingView.layer.cornerRadius = 5
       ratingButton.layer.cornerRadius = 15
       ratingButton.layer.masksToBounds = true
       
+      dateLabel.text = projectDate
+      projectNameLabel.text =  projectName
+      clientLabel.text =  clientName
     }
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
     
     fetchMembers(groupId: groupId)
   }
