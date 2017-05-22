@@ -9,7 +9,7 @@
 import UIKit
 import Cosmos
 class TeamVC: UIViewController {
-  
+  let transition = CircularTransition()
 
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var clientLabel: UILabel!
@@ -17,7 +17,7 @@ class TeamVC: UIViewController {
   var projectDate = ""
   var projectName = ""
   var clientName = ""
-  
+  var comments: [String] = []
     var members : [Member] = []
   var groupId : Int = 0
   var ratingDict : [String:Any] = ["positive_attitude":0,"creativity":0,"responsibility":0,"teamwork":0,"critical_thinking":0,"comment":""]
@@ -27,7 +27,7 @@ class TeamVC: UIViewController {
   @IBOutlet weak var profileImageView: UIImageView!
   @IBOutlet weak var ratingButton: UIButton!
   @IBOutlet var ratingView: UIView!
-
+ @IBOutlet weak var commentButton: UIButton!
   @IBOutlet weak var commentTextView: UITextView!{
     didSet{
       commentTextView.delegate = self
@@ -48,6 +48,8 @@ class TeamVC: UIViewController {
   var effect :UIVisualEffect!
     override func viewDidLoad() {
         super.viewDidLoad()
+      commentButton.layer.masksToBounds = false
+      commentButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
       profileImageView.circlerImage()
       effect = visualEffectView.effect
      visualEffectView.isHidden = true
@@ -69,12 +71,22 @@ class TeamVC: UIViewController {
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     members.removeAll()
+    comments.removeAll()
   }
   
   
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
   }
+  //MARK: comment Button Animation
+  func commentsButtonTapped(){
+    let commentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CommentsVC")as! CommentsVC
+    commentVC.transitioningDelegate = self
+    commentVC.modalPresentationStyle = .custom
+    commentVC.comments = self.comments
+    present(commentVC, animated: true, completion: nil)
+  }
+  
   func fetchMembers(groupId : Int){
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
@@ -194,7 +206,11 @@ class TeamVC: UIViewController {
       
       sendRating()
       
-      animateOut()
+      //testing animation with alert 
+      present(AlertControl.displayAlertWithTitle(title: "Tank You", message: "You received 10 points for your rating check your points for redemption"), animated: true, completion: { 
+         self.animateOut()
+      })
+     
     }else
     if i == 5 {
        ratingButton.setTitle("Submit", for: .normal)
@@ -250,8 +266,6 @@ class TeamVC: UIViewController {
           do {
             _ = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
             
-            
-            
           } catch _ as NSError {
             
           }
@@ -260,10 +274,7 @@ class TeamVC: UIViewController {
       }
       
     }
-    
     dataTask.resume()
-    
-    
   }
 }
 extension TeamVC : UITableViewDataSource{
@@ -278,7 +289,6 @@ extension TeamVC : UITableViewDataSource{
     
     cell.nameLabel.text = members[indexPath.row].name
     guard let url = members[indexPath.row].profileImageUrl else{return UITableViewCell()}
-    // cell.profileImageView.loadImageUsingCacheWithUrlString("https://firebasestorage.googleapis.com/v0/b/clubsinstagram.appspot.com/o/postsImages%2F457EDBF2-F0F3-490D-9C7C-EE37D44EC3B4.jpeg?alt=media&token=65fad619-8538-4364-b1d9-795aeecaec83")
   cell.profileImageView.loadImageUsingCacheWithUrlString(url)
     cell.accessoryType = .none
     return cell
@@ -324,5 +334,21 @@ extension TeamVC: UITextViewDelegate{
 }
   
 }
-
-
+extension TeamVC: UIViewControllerTransitioningDelegate {
+  func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .present
+    transition.startingPoint = commentButton.center
+    
+    transition.circleColor = UIColor(red: 59/255, green: 89/255, blue: 152/255, alpha: 1)//commentButton.backgroundColor!
+    
+    return transition
+  }
+  
+  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    transition.transitionMode = .dismiss
+    transition.startingPoint = commentButton.center
+    transition.circleColor = UIColor.white//commentButton.backgroundColor!
+    
+    return transition
+  }
+}

@@ -13,6 +13,7 @@ var is1Tapped = true
 var is2Tapped = true
 var is3Tapped = true
   
+  @IBOutlet weak var pointsLabel: UILabel!
   @IBOutlet weak var congLabel: UILabel!
   @IBOutlet weak var gift1ImageView: UIImageView!{
     didSet{
@@ -40,6 +41,10 @@ var is3Tapped = true
     }
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+     is1Tapped = true
+     is2Tapped = true
+     is3Tapped = true
+    self.pointsLabel.text = "You've got 100 Points!"
     self.gift1ImageView.frame = CGRect(x: 39, y: 394, width: 100, height: 100)
     self.gift3ImageView.frame = CGRect(x: 220, y: 394, width: 100, height: 100)
     self.gift1ImageView.isHidden = false
@@ -63,7 +68,10 @@ var is3Tapped = true
       }
       self.gift2ImageView.isHidden = true
       self.gift3ImageView.isHidden = true
-    }, completion: nil)
+    }, completion: { (success) -> Void in
+      self.pointsLabel.text = "You've got 70 Points!"
+      self.present(AlertControl.displayAlertWithTitle(title: "Congratulations", message: "you can redeem your prize at the HR office."), animated: true, completion: nil)
+    })
      
     
   }
@@ -79,13 +87,18 @@ var is3Tapped = true
       }
       self.gift1ImageView.isHidden = true
       self.gift3ImageView.isHidden = true
-    }, completion: nil)
+    }, completion:  { (success) -> Void in
+      self.pointsLabel.text = "You've got 70 Points!"
+      self.present(AlertControl.displayAlertWithTitle(title: "Congratulations", message: "you can redeem your prize at the HR office."), animated: true, completion: nil)
+    })
+
     
     
   }
   func gift3Tapped(_ gesture : UITapGestureRecognizer){
-    transform3toCenter()
     
+    transform3toCenter()
+   
     UIView.transition(with: self.gift3ImageView, duration: 2.0, options: .transitionFlipFromRight, animations: {
       if(self.is3Tapped){
         self.gift3ImageView.image = #imageLiteral(resourceName: "starbucks")
@@ -96,8 +109,12 @@ var is3Tapped = true
       }
       self.gift1ImageView.isHidden = true
       self.gift2ImageView.isHidden = true
-    }, completion: nil)
-    //self.congLabel.text = "Congratulations you can redeem your prize at the HR office."
+    }, completion: { (success) -> Void in
+      self.pointsLabel.text = "You've got 70 Points!"
+      self.present(AlertControl.displayAlertWithTitle(title: "Congratulations", message: "you can redeem your prize at the HR office."), animated: true, completion: nil)
+    })
+    
+   
   
   }
   func transform1toCenter(){

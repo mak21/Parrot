@@ -41,7 +41,7 @@
                     <constraint firstItem="Tmf-Cx-Sn8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="7zb-Kt-mYL"/>
                     <constraint firstItem="NTI-BW-v0M" firstAttribute="leading" secondItem="Tmf-Cx-Sn8" secondAttribute="trailing" constant="43" id="A3b-rp-uqD"/>
                     <constraint firstAttribute="bottomMargin" secondItem="NTI-BW-v0M" secondAttribute="bottom" constant="23.5" id="HiY-3c-aHk"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="NTI-BW-v0M" secondAttribute="trailing" constant="100" id="NMY-kR-ICX"/>
+                    <constraint firstAttribute="trailingMargin" relation="lessThanOrEqual" secondItem="NTI-BW-v0M" secondAttribute="trailing" constant="100" id="NMY-kR-ICX"/>
                     <constraint firstAttribute="bottom" secondItem="Tmf-Cx-Sn8" secondAttribute="bottom" constant="17.5" id="j0F-Z5-7Gz"/>
                     <constraint firstItem="Tmf-Cx-Sn8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="17" id="mcG-DK-WN5"/>
                 </constraints>

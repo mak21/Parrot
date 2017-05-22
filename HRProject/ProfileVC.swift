@@ -9,23 +9,22 @@
 import UIKit
 import Cosmos
 class ProfileVC: UIViewController{
- let transition = CircularTransition()
+ 
   
   
-  @IBOutlet weak var logoPic: UIImageView!
+  
   @IBOutlet weak var positive_attitudeView: CosmosView!
   @IBOutlet weak var critical_thinkingView: CosmosView!
   @IBOutlet weak var teamworkView: CosmosView!
   @IBOutlet weak var responsibilityView: CosmosView!
   @IBOutlet weak var creativityView: CosmosView!
   @IBOutlet weak var emailLabel: UILabel!
-  @IBOutlet weak var depLabel: UILabel!
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var profileImage: UIImageView!
-  @IBOutlet weak var commentButton: UIButton!
+ 
   var ratings : [Rate] = []
-  var comments: [String] = []
+  
   var positive_attitudeSum = 0.0
   var creativitySum = 0.0
   var responsibilitySum = 0.0
@@ -39,15 +38,14 @@ class ProfileVC: UIViewController{
       profileImage.circlerImage()
       profileImage.layer.borderWidth = 3.0
       profileImage.layer.borderColor = UIColor.orange.cgColor
-      //logoPic.layer.borderWidth = 1.0
-     // logoPic.layer.borderColor = UIColor.white.cgColor
+      
      
     }
   override func viewWillAppear(_ animated: Bool) {
     
     super.viewWillAppear(animated)
     ratings.removeAll()
-    comments.removeAll()
+    
     positive_attitudeSum = 0.0
     creativitySum = 0.0
     responsibilitySum = 0.0
@@ -64,14 +62,8 @@ class ProfileVC: UIViewController{
     present(controller, animated: true, completion: nil)
   }
   func setupUI(){
-    // shadow for glowing 
-//    commentButton.layer.shadowColor = UIColor.blue.cgColor
-//    commentButton.layer.shadowRadius = 4.0
-//    commentButton.layer.shadowOpacity = 0.4
-//    commentButton.layer.shadowOffset = CGSize.zero
-    //
-    commentButton.layer.masksToBounds = false
-    commentButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
+
+   
     positive_attitudeView.settings.fillMode = .half
     teamworkView.settings.fillMode = .half
     responsibilityView.settings.fillMode = .half
@@ -133,7 +125,7 @@ class ProfileVC: UIViewController{
               
               for r in self.ratings{
                 
-                self.comments.append(r.comment ?? "")
+                //self.comments.append(r.comment ?? "")
                 
                 self.positive_attitudeSum += Double(r.positive_attitude! )
                 self.creativitySum += Double(r.creativity!)
@@ -166,31 +158,5 @@ class ProfileVC: UIViewController{
     
   }
 
+}
 
-//MARK: comment Button Animation
-  func commentsButtonTapped(){
-     let commentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CommentsVC")as! CommentsVC
-    commentVC.transitioningDelegate = self
-    commentVC.modalPresentationStyle = .custom
-    commentVC.comments = self.comments
-    present(commentVC, animated: true, completion: nil)
-  }
-}
-extension ProfileVC: UIViewControllerTransitioningDelegate {
-  func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    transition.transitionMode = .present
-    transition.startingPoint = commentButton.center
-  
-    transition.circleColor = UIColor(red: 59/255, green: 89/255, blue: 152/255, alpha: 1)//commentButton.backgroundColor!
-    
-    return transition
-  }
-  
-  func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-    transition.transitionMode = .dismiss
-    transition.startingPoint = commentButton.center
-    transition.circleColor = UIColor.white//commentButton.backgroundColor!
-    
-    return transition
-  }
-}

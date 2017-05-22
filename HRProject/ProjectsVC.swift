@@ -29,10 +29,39 @@ class ProjectsVC: UIViewController {
   var effect :UIVisualEffect!
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+      
+      //self.navigationItem.titleView = UIImageView(image: logoImage)
+    
+      let titleView = UIView()
+      titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
+              //titleView.backgroundColor = UIColor.red
+      
+      let containerView = UIView()
+      
+      containerView.translatesAutoresizingMaskIntoConstraints = false
+      titleView.addSubview(containerView)
+      
+      let profileImageView = UIImageView()
+      profileImageView.translatesAutoresizingMaskIntoConstraints = false
+      profileImageView.contentMode = .scaleAspectFill
+      profileImageView.layer.cornerRadius = 17.5
+      profileImageView.clipsToBounds = true
+      profileImageView.image  = #imageLiteral(resourceName: "64parrot")
+      
+      containerView.addSubview(profileImageView)
+      profileImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor,constant: 170).isActive = true
+     
+      profileImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+       profileImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+      profileImageView.widthAnchor.constraint(equalToConstant: 35).isActive = true
+      profileImageView.heightAnchor.constraint(equalToConstant: 35).isActive = true
+      
+      containerView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor).isActive = true
+      containerView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
       
       
-      
-      
+       self.navigationItem.titleView = titleView
       
     navigationController?.navigationBar.barTintColor = UIColor(red: 59/255, green: 89/255, blue: 152/255, alpha: 1)
       navigationController?.view.backgroundColor = UIColor.clear
