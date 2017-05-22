@@ -12,6 +12,7 @@ class ProfileVC: UIViewController{
  let transition = CircularTransition()
   
   
+  @IBOutlet weak var logoPic: UIImageView!
   @IBOutlet weak var positive_attitudeView: CosmosView!
   @IBOutlet weak var critical_thinkingView: CosmosView!
   @IBOutlet weak var teamworkView: CosmosView!
@@ -38,7 +39,8 @@ class ProfileVC: UIViewController{
       profileImage.circlerImage()
       profileImage.layer.borderWidth = 3.0
       profileImage.layer.borderColor = UIColor.orange.cgColor
-     
+      logoPic.layer.borderWidth = 2.5
+      logoPic.layer.borderColor = UIColor.orange.cgColor
      
     }
   override func viewWillAppear(_ animated: Bool) {
@@ -81,7 +83,7 @@ class ProfileVC: UIViewController{
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.45:3001/api/v1/users/0?private_token=\(validToken)")
+    let url = URL(string: "http://192.168.1.122:3000/api/v1/users/0?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -125,8 +127,8 @@ class ProfileVC: UIViewController{
               self.profileImage.loadImageUsingCacheWithUrlString(self.currentUser.profileImageUrl!)
               self.nameLabel.text = self.currentUser.name
               self.emailLabel.text = self.currentUser.email
-              self.depLabel.text = self.currentUser.department
-              self.titleLabel.text = self.currentUser.title
+             // self.depLabel.text = self.currentUser.department
+              self.titleLabel.text = self.currentUser.title! + " at " + self.currentUser.department! + " department"
               //rating
               
               for r in self.ratings{

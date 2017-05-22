@@ -53,6 +53,7 @@ extension CommentsVC : UITableViewDataSource{
     cell.containerView.layer.cornerRadius = 8.0
     cell.containerView.layer.masksToBounds = true
     
+    cell.selectionStyle = .none
     return cell
   }
   

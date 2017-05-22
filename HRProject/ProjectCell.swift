@@ -10,6 +10,8 @@ import UIKit
 
 class ProjectCell: UITableViewCell {
   
+  @IBOutlet weak var endedDateLabel: UILabel!
+  @IBOutlet weak var createdDateLabel: UILabel!
   @IBOutlet var membersImages: [UIImageView]!
   @IBOutlet weak var containerView: UIView!
   @IBOutlet weak var projectNameLabel: UILabel!
