@@ -73,9 +73,9 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logobig" translatesAutoresizingMaskIntoConstraints="NO" id="cBe-je-spG">
-                                <rect key="frame" x="16" y="50" width="343" height="90"/>
+                                <rect key="frame" x="16" y="53" width="343" height="75"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="90" id="hDa-OA-qXW"/>
+                                    <constraint firstAttribute="height" constant="75" id="hDa-OA-qXW"/>
                                     <constraint firstAttribute="width" constant="343" id="j45-7y-zHK"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
@@ -113,7 +113,7 @@
                             <constraint firstItem="GUp-p5-20v" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="287" id="0H2-24-DBu"/>
                             <constraint firstItem="k1u-MX-YvH" firstAttribute="centerX" secondItem="VIQ-CQ-Sld" secondAttribute="centerX" constant="-5" id="1Ci-44-qxh"/>
                             <constraint firstItem="GUp-p5-20v" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="13" id="6Lc-1P-AUb"/>
-                            <constraint firstItem="cBe-je-spG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="30" id="8SR-EU-wuM"/>
+                            <constraint firstItem="cBe-je-spG" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="33" id="8SR-EU-wuM"/>
                             <constraint firstItem="QfR-XE-fcF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="AfZ-y7-tUS"/>
                             <constraint firstItem="axg-j6-D7Q" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="8" id="B7O-EK-byh"/>
                             <constraint firstItem="xjq-pu-13P" firstAttribute="top" secondItem="GUp-p5-20v" secondAttribute="bottom" constant="84" id="Chv-Lq-73c"/>
@@ -123,7 +123,7 @@
                             <constraint firstItem="VIQ-CQ-Sld" firstAttribute="top" secondItem="k1u-MX-YvH" secondAttribute="bottom" constant="62" id="FPV-x7-lyp"/>
                             <constraint firstItem="qbq-3h-Hpd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GU1-bk-UfY"/>
                             <constraint firstItem="5uw-Op-SL9" firstAttribute="top" secondItem="o9l-Pv-9tE" secondAttribute="bottom" constant="76" id="Gp2-Nt-T0Y"/>
-                            <constraint firstItem="qbq-3h-Hpd" firstAttribute="centerY" secondItem="cBe-je-spG" secondAttribute="centerY" constant="-4" id="J5a-An-iF5"/>
+                            <constraint firstItem="qbq-3h-Hpd" firstAttribute="centerY" secondItem="cBe-je-spG" secondAttribute="centerY" constant="0.5" id="J5a-An-iF5"/>
                             <constraint firstItem="cBe-je-spG" firstAttribute="centerX" secondItem="k1u-MX-YvH" secondAttribute="centerX" constant="5" id="Kp7-j8-Yca"/>
                             <constraint firstItem="GUp-p5-20v" firstAttribute="trailing" secondItem="xjq-pu-13P" secondAttribute="trailing" constant="-1" id="LY1-dF-B7A"/>
                             <constraint firstItem="o9l-Pv-9tE" firstAttribute="leading" secondItem="5uw-Op-SL9" secondAttribute="leading" id="NBw-gQ-AoA"/>
@@ -793,7 +793,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RcF-YY-ykI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="220"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="m" translatesAutoresizingMaskIntoConstraints="NO" id="SwP-F2-XDT">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SwP-F2-XDT">
                                         <rect key="frame" x="150" y="67" width="75" height="75"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="039-SY-1St"/>
@@ -1096,7 +1096,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Obg-e1-JtC">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="5Z9-Vt-2rq"/>
+                                                        <constraint firstAttribute="height" constant="50" id="8H3-VV-cAL"/>
                                                         <constraint firstAttribute="width" constant="50" id="iei-EK-vc5"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
@@ -1112,7 +1112,7 @@
                                             <constraint firstItem="Obg-e1-JtC" firstAttribute="leading" secondItem="sFW-es-r4k" secondAttribute="leading" id="4K1-as-sy1"/>
                                             <constraint firstItem="Obg-e1-JtC" firstAttribute="top" secondItem="sFW-es-r4k" secondAttribute="top" id="Ypf-Q3-N5M"/>
                                             <constraint firstAttribute="trailing" secondItem="Obg-e1-JtC" secondAttribute="trailing" id="hnU-li-mRU"/>
-                                            <constraint firstAttribute="bottom" secondItem="Obg-e1-JtC" secondAttribute="bottom" id="sco-ew-82d"/>
+                                            <constraint firstAttribute="bottom" secondItem="Obg-e1-JtC" secondAttribute="bottom" id="zey-fF-Ea4"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="teammateImage" destination="Obg-e1-JtC" id="TdI-Wl-5ax"/>

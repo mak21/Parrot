@@ -32,7 +32,14 @@ class LoginVC: UIViewController {
     
     override func viewDidLoad() {
       super.viewDidLoad()
-     
+     emailTextField.layer.borderWidth = 2
+      emailTextField.layer.borderColor = UIColor.darkGray.cgColor
+      emailTextField.layer.cornerRadius = 5
+      emailTextField.layer.masksToBounds = true
+      passwordtextField.layer.borderWidth = 2
+      passwordtextField.layer.borderColor = UIColor.darkGray.cgColor
+      passwordtextField.layer.cornerRadius = 5
+      passwordtextField.layer.masksToBounds = true
   
     }
     

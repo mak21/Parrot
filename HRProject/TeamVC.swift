@@ -24,6 +24,7 @@ class TeamVC: UIViewController {
   var comments: [String] = []
     var members : [Member] = []
   var groupId : Int = 0
+  
   var ratingDict : [String:Any] = ["positive_attitude":0,"creativity":0,"responsibility":0,"teamwork":0,"critical_thinking":0,"comment":""]
   var categories = ["positive_attitude","creativity","responsibility","teamwork","critical_thinking", "comment"]
   var bigCategories = ["Positive Attitude","Creativity","Responsibility","Teamwork","Critical Thinking", "Comment"]
@@ -118,14 +119,19 @@ class TeamVC: UIViewController {
     let commentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CommentsVC")as! CommentsVC
     commentVC.transitioningDelegate = self
     commentVC.modalPresentationStyle = .custom
-    for c in self.comments{
-      if c == "" {
-        
-        self.comments.filter({ (c) -> Bool in
-          c != ""
-        })
+    for i in 0...comments.count{
+      if comments[i] == "" {
+        comments.remove(at: i)
       }
     }
+//    for c in self.comments{
+//      if c == "" {
+//        
+//        self.comments.filter({ (c) -> Bool in
+//          c != ""
+//        })
+//      }
+//    }
     commentVC.comments = self.comments
     present(commentVC, animated: true, completion: nil)
   }

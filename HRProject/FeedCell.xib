@@ -50,7 +50,7 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyHeart" translatesAutoresizingMaskIntoConstraints="NO" id="aPg-sY-xMS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyHeart1" translatesAutoresizingMaskIntoConstraints="NO" id="aPg-sY-xMS">
                                         <rect key="frame" x="24" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="YDd-N2-UdV"/>
@@ -101,7 +101,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="emptyHeart" width="600" height="534"/>
+        <image name="emptyHeart1" width="24" height="24"/>
         <image name="thumbs_up" width="64" height="64"/>
     </resources>
 </document>
