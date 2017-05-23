@@ -94,7 +94,7 @@ class TeamVC: UIViewController {
     profileImageView.contentMode = .scaleAspectFill
     profileImageView.layer.cornerRadius = 17.5
     profileImageView.clipsToBounds = true
-    profileImageView.image  = #imageLiteral(resourceName: "64parrot")
+    profileImageView.image  = #imageLiteral(resourceName: "logo parrot brush")
     
     containerView.addSubview(profileImageView)
     profileImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor,constant: 170).isActive = true
@@ -271,13 +271,8 @@ class TeamVC: UIViewController {
       
       sendRating()
       
-    //  testing animation with alert
-//      present(AlertControl.displayAlertWithTitle(title: "Tank You", message: "You received 10 points for your rating check your points for redemption"), animated: true, completion: {
-//         self.animateOut()
-//      })
       let alert: UIAlertController = UIAlertController(title: "Thank You", message: "You received 10 points for your rating check your points for redemption", preferredStyle: .alert)
-      
-      
+    
       let cancleAction = UIAlertAction(title: "Close", style: .default, handler: {(alert: UIAlertAction) in
       self.animateOut()
    
@@ -292,8 +287,6 @@ class TeamVC: UIViewController {
        ratingButton.setTitle("Submit", for: .normal)
       cosomosRateView.isHidden = true
       commentTextView.isHidden = false
-      
-      
       setupViewUI()
 
     }else{

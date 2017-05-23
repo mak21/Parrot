@@ -12,6 +12,8 @@ protocol FeedCellDelegate: class {
  
 }
 class FeedCell: UITableViewCell {
+  @IBOutlet weak var heartImage: UIImageView!
+  @IBOutlet weak var likesCountLabel: UILabel!
   @IBOutlet weak var feedLabel: UILabel!
   @IBOutlet weak var thumbUpImage : UIImageView!
   @IBOutlet weak var containerView: UIView!
@@ -36,6 +38,9 @@ class FeedCell: UITableViewCell {
     let imageLocation = sender.location(in: self)
     
       delegate?.didSelectThumbUp(isTapped: true, cellLocation: cellLocation, imageLocation: imageLocation)
+    //change image after like
+    self.heartImage.image = #imageLiteral(resourceName: "filled-heart")
+    self.likesCountLabel.text = "\(Int(self.likesCountLabel.text!)! + 1)"
     }
   
 

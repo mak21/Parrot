@@ -50,7 +50,7 @@ class ProjectsVC: UIViewController {
       profileImageView.contentMode = .scaleAspectFill
       profileImageView.layer.cornerRadius = 17.5
       profileImageView.clipsToBounds = true
-      profileImageView.image  = #imageLiteral(resourceName: "64parrot")
+      profileImageView.image  = #imageLiteral(resourceName: "logo parrot brush")
       
       containerView.addSubview(profileImageView)
       profileImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor,constant: 170).isActive = true

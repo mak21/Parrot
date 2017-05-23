@@ -19,6 +19,7 @@ class FeedVC: UIViewController {
       feedTableView.delegate = self
     }
   }
+  var likes: [Int] = []
    var currentUserName : String = ""
   var currentUserUrl : String = ""
   var refresher :UIRefreshControl = UIRefreshControl()
@@ -87,7 +88,7 @@ class FeedVC: UIViewController {
             let url =  medium["url"] as? String else { return }
             for f in feed{
               self.feeds.append(f["feed"] as? String ?? "No data")
-            
+            self.likes.append(f["count"] as? Int ?? 0)
             }
             
             self.currentUserName = name
@@ -137,10 +138,10 @@ class FeedVC: UIViewController {
   let path = UIBezierPath()
     
   //path.move(to: CGPoint(x: 14, y: cellLocation.y + 71))
-  path.move(to: CGPoint(x: imageLocation.x, y: cellLocation.y + imageLocation.y))
+  path.move(to: CGPoint(x: imageLocation.x, y: cellLocation.y + imageLocation.y - 30 ))
   //let endPoint = CGPoint(x: 400, y: cellLocation.y + 71)
     print("ceel",cellLocation,"image",imageLocation)
-    let endPoint = CGPoint(x: 400, y: cellLocation.y + imageLocation.y - 24)
+    let endPoint = CGPoint(x: 400, y: cellLocation.y + imageLocation.y  )
   let randomYShift = 200 + drand48() * 300
     let cp1 = CGPoint(x: 100 , y: Double(cellLocation.y ) - randomYShift)
   let cp2 = CGPoint(x: 200 , y: Double(cellLocation.y ) + randomYShift)
@@ -178,6 +179,7 @@ extension FeedVC : UITableViewDataSource{
       cell.selectionStyle = .none
       
       cell.feedLabel.text = feeds[indexPath.row - 1] // to start from index 0
+      cell.likesCountLabel.text = "\(likes[indexPath.row - 1])"
       cell.delegate = self
       cell.backgroundColor = .clear
       cell.contentView.backgroundColor = .clear
@@ -203,6 +205,7 @@ extension FeedVC : FeedCellDelegate{
       (0...10).forEach { (_) in
         generateAnimatedViews(cellLocation: cellLocation, imageLocation: imageLocation)
       }
+      
     }
   }
  

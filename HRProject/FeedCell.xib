@@ -40,7 +40,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LKf-C3-aFa">
                                 <rect key="frame" x="8" y="72" width="48" height="24"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2G-gn-4Yh">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q2G-gn-4Yh">
                                         <rect key="frame" x="0.0" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="Xye-Vx-pMa"/>
@@ -50,7 +50,7 @@
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart-1" translatesAutoresizingMaskIntoConstraints="NO" id="aPg-sY-xMS">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emptyHeart" translatesAutoresizingMaskIntoConstraints="NO" id="aPg-sY-xMS">
                                         <rect key="frame" x="24" y="0.0" width="24" height="24"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="24" id="YDd-N2-UdV"/>
@@ -93,13 +93,15 @@
             <connections>
                 <outlet property="containerView" destination="CXp-qQ-7Ga" id="NpD-ub-udJ"/>
                 <outlet property="feedLabel" destination="qCI-1u-3P6" id="FXh-rL-Hes"/>
+                <outlet property="heartImage" destination="aPg-sY-xMS" id="Xg4-Df-qb5"/>
+                <outlet property="likesCountLabel" destination="Q2G-gn-4Yh" id="lzm-y3-u5K"/>
                 <outlet property="thumbUpImage" destination="Yre-8X-p8r" id="6EO-Z8-Qhw"/>
             </connections>
             <point key="canvasLocation" x="-127" y="60"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="heart-1" width="24" height="24"/>
+        <image name="emptyHeart" width="600" height="534"/>
         <image name="thumbs_up" width="64" height="64"/>
     </resources>
 </document>
