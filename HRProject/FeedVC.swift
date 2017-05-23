@@ -19,10 +19,13 @@ class FeedVC: UIViewController {
       feedTableView.delegate = self
     }
   }
+   var currentUserName : String = ""
+  var currentUserUrl : String = ""
   var refresher :UIRefreshControl = UIRefreshControl()
   var feeds :[String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
+      
       feedTableView.refreshControl = refresher
       refresher.addTarget(self, action: #selector(refreshData), for: .valueChanged)
       refresher.tintColor = UIColor.orange
@@ -43,9 +46,11 @@ class FeedVC: UIViewController {
     fetchFeedback()
     refresher.endRefreshing()
   }
- 
+  
+
 //MARK: fetching data
   func fetchFeedback(){
+    
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
     let url = URL(string: "http://192.168.1.122:3000/api/v1/feedbacks?private_token=\(validToken)")
@@ -73,13 +78,21 @@ class FeedVC: UIViewController {
             let jsonResponse = try JSONSerialization.jsonObject(with: data!, options: .allowFragments)
             print (jsonResponse)
             
-            guard let validJSON = jsonResponse as? [[String:Any]] else { return }
-            
-            for feed in validJSON{
-              self.feeds.append(feed["feed"] as? String ?? "No data")
+            guard let validJSON = jsonResponse as? [String:Any],
+            let feed = validJSON["feedback"] as? [[String:Any]] ,
+            let user = validJSON["user"] as? [String:Any] ,
+            let name = user["full_name"] as? String,
+            let avatar = user["avatar"]  as? [String:Any],
+            let medium = avatar["medium"] as? [String:Any],
+            let url =  medium["url"] as? String else { return }
+            for f in feed{
+              self.feeds.append(f["feed"] as? String ?? "No data")
             
             }
-              
+            
+            self.currentUserName = name
+           
+            self.currentUserUrl = url
             
             
             DispatchQueue.main.async {
@@ -148,7 +161,9 @@ extension FeedVC : UITableViewDataSource{
     if indexPath.row == 0{
       guard let cell = tableView.dequeueReusableCell(withIdentifier: PostCell.cellIdentifier, for: indexPath) as? PostCell else {  return UITableViewCell()}
       cell.selectionStyle = .none
-      //cell.profileImageView.loadImageUsingCacheWithUrlString()
+      
+      cell.profileImageView.loadImageUsingCacheWithUrlString(currentUserUrl)
+      cell.nameLabel.text = "Welcome " + currentUserName + "!"
       cell.delegate = self
       //layout
       cell.backgroundColor = .clear

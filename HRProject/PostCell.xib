@@ -30,7 +30,7 @@
                                     <constraint firstAttribute="width" constant="35" id="ULD-YU-Lyz"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome mahmoud!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVY-6W-xda">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome someOne!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVY-6W-xda">
                                 <rect key="frame" x="72" y="11" width="220" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -100,6 +100,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="containerView" destination="hwG-sH-oEN" id="d4f-L5-NsJ"/>
+                <outlet property="nameLabel" destination="HVY-6W-xda" id="9iA-cv-YLa"/>
                 <outlet property="postButton" destination="lGN-Ko-CeH" id="MtM-6R-6W7"/>
                 <outlet property="profileImageView" destination="eUW-YO-1nZ" id="gQi-U2-uvp"/>
                 <outlet property="textView" destination="QLG-Ed-Dxb" id="bgx-6V-x3M"/>

@@ -10,7 +10,11 @@ import UIKit
 import Cosmos
 class TeamVC: UIViewController {
   let transition = CircularTransition()
-
+  @IBOutlet weak var positive_attitudeView: CosmosView!
+  @IBOutlet weak var critical_thinkingView: CosmosView!
+  @IBOutlet weak var teamworkView: CosmosView!
+  @IBOutlet weak var responsibilityView: CosmosView!
+  @IBOutlet weak var creativityView: CosmosView!
   @IBOutlet weak var dateLabel: UILabel!
   @IBOutlet weak var clientLabel: UILabel!
   @IBOutlet weak var projectNameLabel: UILabel!
@@ -48,6 +52,7 @@ class TeamVC: UIViewController {
   var effect :UIVisualEffect!
     override func viewDidLoad() {
         super.viewDidLoad()
+      setupNav()
       commentButton.layer.masksToBounds = false
       commentButton.addTarget(self, action: #selector(commentsButtonTapped), for: .touchUpInside)
       profileImageView.circlerImage()
@@ -64,7 +69,7 @@ class TeamVC: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
+    self.navigationController?.navigationBar.tintColor = UIColor.white
     fetchMembers(groupId: groupId)
   }
   
@@ -74,7 +79,37 @@ class TeamVC: UIViewController {
     comments.removeAll()
   }
   
-  
+  func setupNav(){
+    let titleView = UIView()
+    titleView.frame = CGRect(x: 0, y: 0, width: 100, height: 40)
+    //titleView.backgroundColor = UIColor.red
+    
+    let containerView = UIView()
+    
+    containerView.translatesAutoresizingMaskIntoConstraints = false
+    titleView.addSubview(containerView)
+    
+    let profileImageView = UIImageView()
+    profileImageView.translatesAutoresizingMaskIntoConstraints = false
+    profileImageView.contentMode = .scaleAspectFill
+    profileImageView.layer.cornerRadius = 17.5
+    profileImageView.clipsToBounds = true
+    profileImageView.image  = #imageLiteral(resourceName: "64parrot")
+    
+    containerView.addSubview(profileImageView)
+    profileImageView.leftAnchor.constraint(equalTo: containerView.leftAnchor,constant: 170).isActive = true
+    
+    profileImageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+    profileImageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+    profileImageView.widthAnchor.constraint(equalToConstant: 35).isActive = true
+    profileImageView.heightAnchor.constraint(equalToConstant: 35).isActive = true
+    
+    containerView.centerXAnchor.constraint(equalTo: titleView.centerXAnchor).isActive = true
+    containerView.centerYAnchor.constraint(equalTo: titleView.centerYAnchor).isActive = true
+    
+    
+    self.navigationItem.titleView = titleView
+  }
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
   }
@@ -83,6 +118,14 @@ class TeamVC: UIViewController {
     let commentVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CommentsVC")as! CommentsVC
     commentVC.transitioningDelegate = self
     commentVC.modalPresentationStyle = .custom
+    for c in self.comments{
+      if c == "" {
+        
+        self.comments.filter({ (c) -> Bool in
+          c != ""
+        })
+      }
+    }
     commentVC.comments = self.comments
     present(commentVC, animated: true, completion: nil)
   }
@@ -117,15 +160,36 @@ class TeamVC: UIViewController {
             print (jsonResponse)
             
             guard let validJSON = jsonResponse as? [[String:Any]] else { return }
-            for json in validJSON{
+            
+            for d in validJSON {
               
-              let member = Member(dictionary: json)
+              let member = Member(d: d)
               
               self.members.append(member)
               
+               let comment = d["comment"] as? [String] ?? [""]
+              
+              print("comment",comment,"\n d[comment]")
+              for i in comment{
+                  self.comments.append(i)
+              }
+            
             }
+            
+            let ratingsDict = validJSON.last
+            
+            guard let paAVG = ratingsDict?["positive_attitude_ave"] as? Int,
+            let ctAVG = ratingsDict?["critical_thinking_ave"] as? Int,
+           let  cAVG = ratingsDict?["creativity_ave"] as? Int,
+           let  rAVG = ratingsDict?["responsibility_ave"] as? Int,
+            let  tAVG = ratingsDict?["teamwork_ave"] as? Int else{return}
             DispatchQueue.main.async {
               self.teamTableView.reloadData()
+              self.positive_attitudeView.rating = Double(paAVG)
+              self.creativityView.rating = Double(cAVG)
+              self.teamworkView.rating = Double(tAVG)
+              self.responsibilityView.rating = Double(rAVG)
+              self.critical_thinkingView.rating = Double(ctAVG)
             }
           } catch _ as NSError {
             
@@ -139,6 +203,7 @@ class TeamVC: UIViewController {
     dataTask.resume()
   }
   func setupViewUI(){
+    
     if i == 0{
       ratingButton.setTitle("Next", for: .normal)
       cosomosRateView.isHidden = false
@@ -206,10 +271,21 @@ class TeamVC: UIViewController {
       
       sendRating()
       
-      //testing animation with alert 
-      present(AlertControl.displayAlertWithTitle(title: "Tank You", message: "You received 10 points for your rating check your points for redemption"), animated: true, completion: { 
-         self.animateOut()
+    //  testing animation with alert
+//      present(AlertControl.displayAlertWithTitle(title: "Tank You", message: "You received 10 points for your rating check your points for redemption"), animated: true, completion: {
+//         self.animateOut()
+//      })
+      let alert: UIAlertController = UIAlertController(title: "Thank You", message: "You received 10 points for your rating check your points for redemption", preferredStyle: .alert)
+      
+      
+      let cancleAction = UIAlertAction(title: "Close", style: .default, handler: {(alert: UIAlertAction) in
+      self.animateOut()
+   
       })
+      
+      alert.addAction(cancleAction)
+      self.present(alert, animated: true, completion: nil)
+      //self.animateOut()
      
     }else
     if i == 5 {
@@ -288,6 +364,7 @@ extension TeamVC : UITableViewDataSource{
     guard let cell = tableView.dequeueReusableCell(withIdentifier: TeamCell.cellIdentifier, for: indexPath) as? TeamCell else {  return UITableViewCell()}
     
     cell.nameLabel.text = members[indexPath.row].name
+    
     guard let url = members[indexPath.row].profileImageUrl else{return UITableViewCell()}
   cell.profileImageView.loadImageUsingCacheWithUrlString(url)
     cell.accessoryType = .none
@@ -303,12 +380,15 @@ extension TeamVC : UITableViewDelegate{
     self.ratingDict["ratee_id"] = members[indexPath.row].id
     setupViewUI()
     selectedPersonNameLabel.text = members[indexPath.row].name
+    
     guard let url = members[indexPath.row].profileImageUrl else{return}
     profileImageView.loadImageUsingCacheWithUrlString(url)
     if cell?.accessoryType == UITableViewCellAccessoryType.none{
     animateIn()
       
     }
+    
+    //animateIn() //remove it
     cell?.accessoryType = .checkmark
     tableView.deselectRow(at: indexPath, animated: true)
    navigationController?.navigationBar.isHidden = true

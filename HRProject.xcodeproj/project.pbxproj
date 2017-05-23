@@ -15,6 +15,7 @@
 		24757A8E1ECEA2DA0081BFAE /* CommentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24757A8C1ECEA2DA0081BFAE /* CommentsCell.swift */; };
 		24757A8F1ECEA2DA0081BFAE /* CommentsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24757A8D1ECEA2DA0081BFAE /* CommentsCell.xib */; };
 		249590D71ECF109500E610A7 /* AlertControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249590D61ECF109500E610A7 /* AlertControl.swift */; };
+		249DF73F1ED3E4E200ABBCDC /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249DF73E1ED3E4E200ABBCDC /* CollectionViewCell.swift */; };
 		249F2BB11ECC29890005F9AF /* extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249F2BB01ECC29890005F9AF /* extension.swift */; };
 		249F2BB61ECC2FDC0005F9AF /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 249F2BB41ECC2FDC0005F9AF /* TeamCell.swift */; };
 		249F2BB71ECC2FDC0005F9AF /* TeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 249F2BB51ECC2FDC0005F9AF /* TeamCell.xib */; };
@@ -36,6 +37,7 @@
 		24D68FD61ECB4B00008ACFF5 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D68FD51ECB4B00008ACFF5 /* ProfileVC.swift */; };
 		24DFD5401ED28C85001A5A9E /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DFD53F1ED28C85001A5A9E /* Project.swift */; };
 		24DFD5421ED2906A001A5A9E /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DFD5411ED2906A001A5A9E /* Formatter.swift */; };
+		24DFD5461ED362EF001A5A9E /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DFD5451ED362EF001A5A9E /* SearchVC.swift */; };
 		258E6B88BBD0591122AEE6D8 /* Pods_HRProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 307A6BB174A00B5DB20DF3E0 /* Pods_HRProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,7 @@
 		24757A8C1ECEA2DA0081BFAE /* CommentsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentsCell.swift; sourceTree = "<group>"; };
 		24757A8D1ECEA2DA0081BFAE /* CommentsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentsCell.xib; sourceTree = "<group>"; };
 		249590D61ECF109500E610A7 /* AlertControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertControl.swift; sourceTree = "<group>"; };
+		249DF73E1ED3E4E200ABBCDC /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		249F2BB01ECC29890005F9AF /* extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extension.swift; sourceTree = "<group>"; };
 		249F2BB41ECC2FDC0005F9AF /* TeamCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
 		249F2BB51ECC2FDC0005F9AF /* TeamCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TeamCell.xib; sourceTree = "<group>"; };
@@ -71,6 +74,7 @@
 		24D68FD51ECB4B00008ACFF5 /* ProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		24DFD53F1ED28C85001A5A9E /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		24DFD5411ED2906A001A5A9E /* Formatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
+		24DFD5451ED362EF001A5A9E /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		307A6BB174A00B5DB20DF3E0 /* Pods_HRProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HRProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8520E1591464E6EA16820814 /* Pods-HRProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-HRProject/Pods-HRProject.release.xcconfig"; sourceTree = "<group>"; };
 		DDE00E8CBB5068B7E33B8073 /* Pods-HRProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HRProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HRProject/Pods-HRProject.debug.xcconfig"; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 				24757A8D1ECEA2DA0081BFAE /* CommentsCell.xib */,
 				2453A4031ED056220068E7FC /* ProjectCell.swift */,
 				2453A4041ED056220068E7FC /* ProjectCell.xib */,
+				249DF73E1ED3E4E200ABBCDC /* CollectionViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 				24D68FD51ECB4B00008ACFF5 /* ProfileVC.swift */,
 				245DA9271ECC936B00A37705 /* CommentsVC.swift */,
 				24A4013F1ECD905B00E2E290 /* RewordsVC.swift */,
+				24DFD5451ED362EF001A5A9E /* SearchVC.swift */,
 			);
 			name = controllers;
 			sourceTree = "<group>";
@@ -327,12 +333,14 @@
 				24DFD5421ED2906A001A5A9E /* Formatter.swift in Sources */,
 				24DFD5401ED28C85001A5A9E /* Project.swift in Sources */,
 				24757A8E1ECEA2DA0081BFAE /* CommentsCell.swift in Sources */,
+				249DF73F1ED3E4E200ABBCDC /* CollectionViewCell.swift in Sources */,
 				249590D71ECF109500E610A7 /* AlertControl.swift in Sources */,
 				249F2BB11ECC29890005F9AF /* extension.swift in Sources */,
 				24D68FD61ECB4B00008ACFF5 /* ProfileVC.swift in Sources */,
 				2453A4051ED056220068E7FC /* ProjectCell.swift in Sources */,
 				245DA92B1ECC940D00A37705 /* CircularTransition.swift in Sources */,
 				2453A4021ED035E90068E7FC /* GradientView.swift in Sources */,
+				24DFD5461ED362EF001A5A9E /* SearchVC.swift in Sources */,
 				24D68FD01ECAFC2A008ACFF5 /* ProjectsVC.swift in Sources */,
 				24A401461ECD916E00E2E290 /* FeedCell.swift in Sources */,
 				24D68FCB1ECAD9C0008ACFF5 /* LoginVC.swift in Sources */,

@@ -8,10 +8,22 @@
 
 import UIKit
 import Cosmos
+enum ProfileType {
+  case myProfile
+  case otherProfile
+}
 class ProfileVC: UIViewController{
  
   
   
+  
+  @IBOutlet weak var collectionView: UICollectionView!{
+    didSet{
+      collectionView.delegate = self
+      collectionView.dataSource = self
+      
+    }
+  }
   
   @IBOutlet weak var positive_attitudeView: CosmosView!
   @IBOutlet weak var critical_thinkingView: CosmosView!
@@ -22,9 +34,11 @@ class ProfileVC: UIViewController{
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var profileImage: UIImageView!
- 
+  var profileType : ProfileType = .myProfile
   var ratings : [Rate] = []
-  
+  var teammatesIds : [Int] = []
+  var teammatesUrls:[String] = []
+  //var collectionviewLayout: CustomImageFlowLayout!
   var positive_attitudeSum = 0.0
   var creativitySum = 0.0
   var responsibilitySum = 0.0
@@ -33,7 +47,9 @@ class ProfileVC: UIViewController{
   var currentUser : Member!
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+      //collectionviewLayout = CustomImageFlowLayout()
+      //collectionView.collectionViewLayout = collectionviewLayout
+     // collectionView.backgroundColor = .white
       setupUI()
       profileImage.circlerImage()
       profileImage.layer.borderWidth = 3.0
@@ -44,8 +60,11 @@ class ProfileVC: UIViewController{
   override func viewWillAppear(_ animated: Bool) {
     
     super.viewWillAppear(animated)
-    ratings.removeAll()
     
+     configurProfileType(profileType)
+    ratings.removeAll()
+     teammatesIds.removeAll()
+    teammatesUrls.removeAll()
     positive_attitudeSum = 0.0
     creativitySum = 0.0
     responsibilitySum = 0.0
@@ -53,7 +72,35 @@ class ProfileVC: UIViewController{
     critical_thinkingSum = 0.0
     fetchUserData()
   }
- 
+  func configurProfileType (_ type : ProfileType) {
+    switch type {
+    case .myProfile :
+      
+      configureMyProfile()
+    case .otherProfile:
+      
+      configureOtherProfile()
+    }
+  }
+  func configureMyProfile () {
+    
+//    let barButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(logoutButtonTapped))
+//    navigationItem.rightBarButtonItem = barButtonItem
+//    editButton.addTarget(self, action: #selector(editButtonTapped), for: .touchUpInside)
+//    
+//    if let id = currentUser?.uid {
+//      print(id)
+//      currentUserID = id
+//    }
+  }
+  
+  func configureOtherProfile () {
+    
+//    editButton.setTitle("Follow", for: .normal)
+//    checkFollowing(sender: editButton)
+//    editButton.addTarget(self, action: #selector(followButtonTapped), for: .touchUpInside)
+  }
+  
   @IBAction func logOutButtonTapped(_ sender: Any) {
     let defaults = UserDefaults.standard
     defaults.removeObject(forKey: "AUTH_TOKEN")
@@ -104,9 +151,21 @@ class ProfileVC: UIViewController{
             // U might need to do some changes here!!
             guard let validJSON = jsonResponse as? [String:Any] ,
            let ratingDicts =  validJSON["rating"] as? [[String:Any]],
-            let userDict = validJSON["user"] as? [String:Any] else { return }
+           let userDict = validJSON["user"] as? [[String:Any]],
+            let projectUsers = validJSON["project_users"] as? [[String:Any]] else { return }
             
-              self.currentUser = Member(dictionary: userDict)
+       
+            for p in projectUsers{
+              
+              self.teammatesIds.append(p["id"] as! Int)
+              for url in p["urls"] as! [String]{
+              self.teammatesUrls.append(url)
+            }
+            }
+            for u in userDict {
+               self.currentUser = Member(d: u)
+            }
+           
             
             for r in ratingDicts{
               
@@ -116,10 +175,12 @@ class ProfileVC: UIViewController{
             
             DispatchQueue.main.async {
               //currentUser
+              self.collectionView.reloadData()
+              
               self.profileImage.loadImageUsingCacheWithUrlString(self.currentUser.profileImageUrl!)
               self.nameLabel.text = self.currentUser.name
               self.emailLabel.text = self.currentUser.email
-             // self.depLabel.text = self.currentUser.department
+            
               self.titleLabel.text = self.currentUser.title! + " at " + self.currentUser.department! + " department"
               //rating
               
@@ -158,5 +219,33 @@ class ProfileVC: UIViewController{
     
   }
 
+}
+extension ProfileVC : UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+  
+  
+  func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return 1
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+    return teammatesUrls.count
+    
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
+    
+  cell.teammateImage.loadImageUsingCacheWithUrlString(teammatesUrls[indexPath.row])
+    
+    
+    
+    return cell
+    
+  }
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+  // go to there profile
+  }
 }
 

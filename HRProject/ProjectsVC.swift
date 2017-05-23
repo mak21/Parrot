@@ -24,6 +24,9 @@ class ProjectsVC: UIViewController {
       projectsTableView.delegate = self
       projectsTableView.backgroundColor = UIColor(red: 241/255, green: 241/255, blue: 241/255, alpha: 1)
       projectsTableView.separatorStyle = .none
+      
+      projectsTableView.estimatedRowHeight = 135
+      projectsTableView.rowHeight = UITableViewAutomaticDimension
     }
   }
   var effect :UIVisualEffect!
@@ -143,17 +146,19 @@ extension ProjectsVC : UITableViewDataSource{
   }
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
      guard let cell = tableView.dequeueReusableCell(withIdentifier: ProjectCell.cellIdentifier, for: indexPath) as? ProjectCell else {  return UITableViewCell()}
-   // cell.projectNameLabel.text = projects[indexPath.row] as? String
+   
     cell.projectNameLabel.text = projects[indexPath.row].name
     guard let urls = projects[indexPath.row].profileImagesUrl else {
       return UITableViewCell()}
-    
-    for  i in 1...3 {
+    if urls.count != 0 {
+    for  i in 0...4  {
+      if i < urls.count{
      cell.membersImages[i].loadImageUsingCacheWithUrlString(urls[i])
-    
+      }
+    }
     }
     cell.createdDateLabel.text = projects[indexPath.row].dateCreated! + " - " + projects[indexPath.row].dateEnded!
-    cell.endedDateLabel.text = ""
+    
     //layout
     cell.backgroundColor = .clear
     cell.contentView.backgroundColor = .clear
@@ -165,9 +170,9 @@ extension ProjectsVC : UITableViewDataSource{
   
 }
 extension ProjectsVC : UITableViewDelegate{
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 135
-  }
+//  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//    return 135
+//  }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
      let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TeamVC")as! TeamVC
