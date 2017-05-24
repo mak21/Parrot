@@ -199,7 +199,12 @@ class ProfileVC: UIViewController{
                 
                 self.critical_thinkingSum += Double(r.critical_thinking!)
               }
-              
+//              self.positive_attitudeSum = 10
+//                              self.creativitySum = 10
+//                              self.responsibilitySum = 20
+//                              self.teamworkSum = 25
+//              
+//                              self.critical_thinkingSum = 15
               if self.ratings.count != 0{
               self.positive_attitudeView.rating = self.positive_attitudeSum / Double(self.ratings.count)
               
