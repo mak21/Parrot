@@ -20,6 +20,12 @@ class FeedCell: UITableViewCell {
   weak var delegate : FeedCellDelegate?
   static let cellIdentifier = "FeedCell"
   static let cellNib = UINib(nibName: FeedCell.cellIdentifier, bundle: Bundle.main)
+  
+  
+  override func prepareForReuse() {
+    heartImage.image = #imageLiteral(resourceName: "emptyHeart1")
+  }
+  
     override func awakeFromNib() {
         super.awakeFromNib()
       let tapLike = UITapGestureRecognizer(target: self, action: #selector(self.handleThumbUP))
@@ -42,6 +48,8 @@ class FeedCell: UITableViewCell {
     self.heartImage.image = #imageLiteral(resourceName: "filled-heart")
     self.likesCountLabel.text = "\(Int(self.likesCountLabel.text!)! + 1)"
     }
+  
+  
   
 
 

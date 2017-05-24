@@ -47,6 +47,7 @@ class Member {
       self.name = name
       
       self.email = d["email"] as? String
+    
       self.profileImageUrl = d["avatar_url"] as? String
       //       guard let images = d["avatar_url"] as? [String:Any] else{return }
       //      for image in (images["medium"] as? [String:Any])! {

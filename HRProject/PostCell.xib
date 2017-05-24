@@ -23,7 +23,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hwG-sH-oEN">
                         <rect key="frame" x="8" y="8" width="304" height="144"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="m" translatesAutoresizingMaskIntoConstraints="NO" id="eUW-YO-1nZ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eUW-YO-1nZ">
                                 <rect key="frame" x="14" y="4" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="8Yv-CR-cZG"/>
@@ -109,7 +109,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="m" width="332" height="376"/>
         <image name="post" width="24" height="24"/>
     </resources>
 </document>

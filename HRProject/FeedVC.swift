@@ -22,14 +22,14 @@ class FeedVC: UIViewController {
   var likes: [Int] = []
    var currentUserName : String = ""
   var currentUserUrl : String = ""
-  var refresher :UIRefreshControl = UIRefreshControl()
+  //var refresher :UIRefreshControl = UIRefreshControl()
   var feeds :[String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
       
-      feedTableView.refreshControl = refresher
-      refresher.addTarget(self, action: #selector(refreshData), for: .valueChanged)
-      refresher.tintColor = UIColor.orange
+     // feedTableView.refreshControl = refresher
+     // refresher.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+     // refresher.tintColor = UIColor.orange
       
       
     }
@@ -42,10 +42,12 @@ class FeedVC: UIViewController {
   override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     self.view.endEditing(true)
   }
+  
   func refreshData(){
     feeds.removeAll()
     fetchFeedback()
-    refresher.endRefreshing()
+    //refresher.endRefreshing()
+   // feedTableView.refreshControl?.endRefreshing()
   }
   
 
@@ -54,7 +56,7 @@ class FeedVC: UIViewController {
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.122:3000/api/v1/feedbacks?private_token=\(validToken)")
+    let url = URL(string: "http://192.168.1.45:3001/api/v1/feedbacks?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -97,7 +99,10 @@ class FeedVC: UIViewController {
             
             
             DispatchQueue.main.async {
+              
               self.feedTableView.reloadData()
+             // self.refresher.endRefreshing()
+             // self.feedTableView.refreshControl?.endRefreshing()
             }
             
           } catch _ as NSError {
@@ -201,9 +206,12 @@ extension FeedVC : UITableViewDelegate{
 }
 extension FeedVC : FeedCellDelegate{
   func didSelectThumbUp(isTapped: Bool, cellLocation: CGPoint, imageLocation: CGPoint) {
+    
+    let netCellLocation = CGPoint(x: cellLocation.x , y: cellLocation.y - feedTableView.contentOffset.y )
+    
     if isTapped{
       (0...10).forEach { (_) in
-        generateAnimatedViews(cellLocation: cellLocation, imageLocation: imageLocation)
+        generateAnimatedViews(cellLocation: netCellLocation, imageLocation: imageLocation)
       }
       
     }

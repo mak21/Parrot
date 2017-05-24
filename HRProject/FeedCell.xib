@@ -22,9 +22,9 @@
                         <rect key="frame" x="8" y="8" width="304" height="144"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qCI-1u-3P6">
-                                <rect key="frame" x="4" y="4" width="304" height="34"/>
+                                <rect key="frame" x="8" y="11" width="288" height="38"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="34" id="rMc-cD-453"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="38" id="rMc-cD-453"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -72,14 +72,14 @@
                             <constraint firstItem="LKf-C3-aFa" firstAttribute="top" relation="lessThanOrEqual" secondItem="qCI-1u-3P6" secondAttribute="bottom" constant="42" id="MXM-yU-SWm"/>
                             <constraint firstAttribute="trailing" secondItem="tXH-og-EnK" secondAttribute="trailing" id="Ptg-Qx-cvN"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Yre-8X-p8r" secondAttribute="trailing" constant="271" id="QFw-03-Fam"/>
-                            <constraint firstItem="qCI-1u-3P6" firstAttribute="top" secondItem="CXp-qQ-7Ga" secondAttribute="top" constant="4" id="QpO-xs-NPI"/>
+                            <constraint firstItem="qCI-1u-3P6" firstAttribute="top" secondItem="CXp-qQ-7Ga" secondAttribute="top" constant="11" id="QpO-xs-NPI"/>
                             <constraint firstItem="tXH-og-EnK" firstAttribute="leading" secondItem="CXp-qQ-7Ga" secondAttribute="leading" id="aCK-zl-DNY"/>
                             <constraint firstItem="LKf-C3-aFa" firstAttribute="leading" secondItem="CXp-qQ-7Ga" secondAttribute="leading" constant="8" id="ex2-Zq-yNe"/>
                             <constraint firstItem="tXH-og-EnK" firstAttribute="top" secondItem="LKf-C3-aFa" secondAttribute="bottom" constant="3" id="hST-km-jZK"/>
                             <constraint firstItem="Yre-8X-p8r" firstAttribute="leading" secondItem="CXp-qQ-7Ga" secondAttribute="leading" constant="8" id="hiW-oc-5QK"/>
-                            <constraint firstItem="qCI-1u-3P6" firstAttribute="leading" secondItem="CXp-qQ-7Ga" secondAttribute="leading" constant="4" id="onP-VH-aQD"/>
+                            <constraint firstItem="qCI-1u-3P6" firstAttribute="leading" secondItem="CXp-qQ-7Ga" secondAttribute="leading" constant="8" id="onP-VH-aQD"/>
                             <constraint firstAttribute="bottom" secondItem="Yre-8X-p8r" secondAttribute="bottom" constant="8.5" id="yiR-DM-Dm3"/>
-                            <constraint firstAttribute="trailing" secondItem="qCI-1u-3P6" secondAttribute="trailing" constant="-4" id="zRi-26-lLd"/>
+                            <constraint firstAttribute="trailing" secondItem="qCI-1u-3P6" secondAttribute="trailing" constant="8" id="zRi-26-lLd"/>
                         </constraints>
                     </view>
                 </subviews>

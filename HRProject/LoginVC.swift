@@ -40,6 +40,8 @@ class LoginVC: UIViewController {
       passwordtextField.layer.borderColor = UIColor.darkGray.cgColor
       passwordtextField.layer.cornerRadius = 5
       passwordtextField.layer.masksToBounds = true
+     
+      
   
     }
     
@@ -55,7 +57,7 @@ class LoginVC: UIViewController {
 //      let password = "12345678"
       
       
-      let url = URL(string: "http://192.168.1.122:3000/api/v1/sessions")
+      let url = URL(string: "http://192.168.1.45:3001/api/v1/sessions")
       var urlRequest = URLRequest(url: url!)
       
       urlRequest.httpMethod = "POST"
