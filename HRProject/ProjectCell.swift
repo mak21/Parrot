@@ -23,7 +23,7 @@ static let cellNib = UINib(nibName: ProjectCell.cellIdentifier, bundle: Bundle.m
         image.circlerImage()
         image.layer.borderWidth = 2.0
         image.layer.borderColor = UIColor.white.cgColor
-        image.image = #imageLiteral(resourceName: "m")
+        image.image = #imageLiteral(resourceName: "Solid_blue")
       }
     }
 

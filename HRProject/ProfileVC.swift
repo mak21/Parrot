@@ -122,7 +122,7 @@ class ProfileVC: UIViewController{
     
     guard let validToken = UserDefaults.standard.string(forKey: "AUTH_TOKEN") else { return }
     
-    let url = URL(string: "http://192.168.1.45:3001/api/v1/users/0?private_token=\(validToken)")
+    let url = URL(string: "https://parrotext.herokuapp.com/api/v1/users/0?private_token=\(validToken)")
     
     var urlRequest = URLRequest(url: url!)
     urlRequest.httpMethod = "GET"
@@ -154,16 +154,18 @@ class ProfileVC: UIViewController{
            let userDict = validJSON["user"] as? [[String:Any]],
             let projectUsers = validJSON["project_users"] as? [[String:Any]] else { return }
             
-       
-            for p in projectUsers{
+           // for p in projectUsers{
               
-              self.teammatesIds.append(p["id"] as! Int)
-              for url in p["urls"] as! [String]{
-                  
-              self.teammatesUrls.append(url)
-            
+            //  self.teammatesIds.append(p["id"] as! Int)
+          
+              for url in projectUsers.last?["urls"] as! [String]{
+                
+                self.teammatesUrls.append(url)
+                
               }
-            }
+              
+            //}
+
            
             for u in userDict {
                self.currentUser = Member(d: u)
@@ -199,12 +201,7 @@ class ProfileVC: UIViewController{
                 
                 self.critical_thinkingSum += Double(r.critical_thinking!)
               }
-//              self.positive_attitudeSum = 10
-//                              self.creativitySum = 10
-//                              self.responsibilitySum = 20
-//                              self.teamworkSum = 25
-//              
-//                              self.critical_thinkingSum = 15
+
               if self.ratings.count != 0{
               self.positive_attitudeView.rating = self.positive_attitudeSum / Double(self.ratings.count)
               

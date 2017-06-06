@@ -16,10 +16,7 @@ extension UIImageView {
 }
   func loadImageUsingCacheWithUrlString(_ urlString: String) {
     
-    
-    //self.image = nil //it wasn't working before that !!
-    
-    //check cache for image first
+
     
     if let cachedImage = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
       
@@ -28,7 +25,8 @@ extension UIImageView {
     }
     
     //otherwise fire off a new download
-    guard let url = URL(string: "http://192.168.1.45:3001/" + urlString) else {return}
+    
+    guard let url = URL(string: urlString) else {return}
      //guard let url = URL(string:urlString) else {return}
     URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
       
